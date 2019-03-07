@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>事件搜索页面</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <script src="/./static/Blob.js"></script>
+    <script src="/./static/FileSaver.js"></script>
+    <script src="/./static/tableExport.js"></script>
+    <style>
+        html,
+    body {
+        overflow-x: auto;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="x-body">
+        {% if request.session.user_name != "陈武" %}
+        <div class="layui-row">
+            <form action="/forminfo/event/" method="POST" class="layui-form layui-col-md12 x-so" id="form">&nbsp; {% csrf_token %}
+                <input class="layui-input" placeholder="发起时间" name="show_timeplan" id="start">开始&ensp;
+                <input class="layui-input" placeholder="发起时间" name="show_timeevent" id="end">结束&emsp;
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction2()"><i class="layui-icon">&#xe615;</i>查询</button>
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction3()"><i class="layui-icon">&#xe681;</i>按条件导出</button>
+            </form>
+        </div>
+        {% endif %}
+        {% if request.session.user_name == "陈武" %}
+        <div class="layui-row">
+            <form action="/forminfo/event/" method="POST" class="layui-form layui-col-md12 x-so" id="form1">&nbsp; {% csrf_token %}
+                <input type="text" name="show_name" placeholder="姓名" autocomplete="off" class="layui-input">姓名&ensp;
+                <input type="text" name="show_area" placeholder="地区" autocomplete="off" class="layui-input">区域&ensp;
+                <input type="text" name="show_sellname" placeholder="姓名" autocomplete="off" class="layui-input">销售&ensp;
+                <input class="layui-input" placeholder="发起时间" name="show_timeplan" id="start1">开始&ensp;
+                <input class="layui-input" placeholder="发起时间" name="show_timeevent" id="end1">结束&emsp;
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction()"><i class="layui-icon">&#xe615;</i>查询</button>
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction1()"><i class="layui-icon">&#xe681;</i>按条件导出</button>
+            </form>
+        </div>
+        {% endif %}
+        <xblock>
+            {% if request.session.user_department != '整机事业部' and request.session.user_department != '渠道事业部' %}
+            <a href="/forminfo/addform-event" class="layui-btn"><i class="layui-icon">&#xe608;</i>添加新的事件管理</a>&ensp;
+            <a href="/forminfo/amend-event" class="layui-btn">   <i class="layui-icon">&#xe608;</i>修改已有的事件管理</a>&ensp;
+            <button class="layui-btn" onclick="x_admin_show('事件管理-导入测试','/forminfo/excelevent/',350,180)"><i class="layui-icon"></i>导入多条事件管理</button>
+            {% endif %}
+            {% if request.session.user_department == '整机事业部' or request.session.user_department == '渠道事业部' %}
+            <a href="/forminfo/eventrevise" class="layui-btn"><i class="layui-icon">&#xe608;</i>评价已有的事件管理</a>&ensp;
+            {% endif %}
+        </xblock>
+        <div class="layui-btn layui-btn-normal layui-btn-sm layui-btn-radius">
+            事件管理&ensp;
+        </div>
+<!--         <div id="export" align="right"> -->
+            <!-- <a data-type="json" href="javascript:;">导出json(测试)</a> -->
+            <!-- 
+        <a data-type="txt" href="javascript:;"><i class="layui-icon">&#xe681;</i>导出txt(测试)</a>&ensp;&ensp; -->
+<!--             <a data-type="csv" href="javascript:;"><i class="layui-icon">&#xe681;</i>导出csv文件(仅供备用)</a>&ensp;&ensp;
+            <a data-type="xls" href="javascript:;"><i class="layui-icon">&#xe681;</i>导出excel文件(仅供备用)</a>&ensp;&ensp;
+            <a data-type="doc" href="javascript:;"><i class="layui-icon">&#xe681;</i>导出word文件(仅供备用)</a>&ensp;&ensp;
+        </div> -->
+        <table id="table2" class="layui-table" lay-size="sm">
+            <thead>
+                <th>姓名</th>
+                <th>区域</th>
+                <th>销售</th>
+                <th>客户名称</th>
+                <th>客户分类</th>
+                <th>项目名称</th>
+                <th>发起时间</th>
+                <th>要求回复时间</th>
+                <th>预计用时</th>
+                <th>过程描述</th>
+                <th>结束时间</th>
+                <th>用时估算</th>
+                <th>是否有问题</th>
+                <th>问题描述</th>
+                <th>满意度评分</th>
+                <th>评价</th>
+                <th>成交时间</th>
+                <th>客户满意度</th>
+            </thead>
+            <tbody>
+                {% for infoevent in Forminfoevent %}
+                <tr>
+                    <td style="white-space: nowrap;"><a href="{{ infoevent.showdetail_url }}" style="color: #009688">{{ infoevent.fae_name }}</a></td>
+                    <td style="white-space: nowrap;">{{ infoevent.area }}</td>
+                    <td style="white-space: nowrap;">{{ infoevent.sellname }}</td>
+                    <td width="5%">{{ infoevent.customer_name }}</td>
+                    <td width="5%">{{ infoevent.customer_classification }}</td>
+                    <td width="5%">{{ infoevent.project_name }}</td>
+                    <td>{{ infoevent.start_date }}</td>
+                    <td>{{ infoevent.reply_date }}</td>
+                    <td>{{ infoevent.estimated_time }}分钟</td>
+                     {% if info.process|length >= 34 %}
+                    <td width="10%">{{ info.process|slice:"34"|linebreaksbr }}......</td>
+                    {% else %}
+                    <td width="10%">{{ info.process|linebreaksbr }}</td>
+                    {% endif %}
+                    <td>{{ infoevent.end_date }}</td>
+                    <td>{{ infoevent.estimate }}分钟</td>
+                    <td>
+                        {{ infoevent.is_question|default_if_none:"" }}
+                    </td>
+                    {% if info.question_describe|length >= 34 %}
+                    <td width="8%">
+                        {{ info.question_describe|slice:"34"|linebreaksbr }}......
+                    </td>
+                    {% else %}
+                    <td width="8%">
+                        {{ info.question_describe|linebreaksbr|default_if_none:"" }}
+                    </td>
+                    {% endif %}
+                    <td>
+                        {{infoevent.satisfaction_score|default_if_none:"" }}
+                    </td>
+                    <td>
+                        {{ infoevent.satisfaction|default_if_none:"" }}</td>
+                    <td>
+                        {{ infoevent.transaction_time|default_if_none:"" }}
+
+                    </td>
+                    <td>
+                        {{ infoevent.customer_satisfaction|default_if_none:"" }}
+
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+    <script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+        laydate.render({
+            elem: '#start1' //指定元素
+        });
+        laydate.render({
+            elem: '#end1' //指定元素
+        });
+    });
+
+    function changeAction() {
+        $('#form1').attr('action', '/forminfo/event/');
+        // console.log($('#form1').attr('action'));
+
+    }
+
+    function changeAction1() {
+        $('#form1').attr('action', '/forminfo/exportfaeevent/');
+        // console.log($('#form1').attr('action'));
+
+    }
+
+    function changeAction2() {
+        $('#form').attr('action', '/forminfo/event/');
+        // console.log($('#form').attr('action'));
+
+    }
+
+    function changeAction3() {
+        $('#form').attr('action', '/forminfo/exportfaeevent/');
+        // console.log($('#form').attr('action'));
+
+    }
+    </script>
+<!--     <script>
+    var $exportLink = document.getElementById('export');
+
+    $exportLink.addEventListener('click', function(e) {
+
+        e.preventDefault();
+
+        if (e.target.nodeName === "A") {
+
+            tableExport('table2', 'Fae事件管理', e.target.getAttribute('data-type'));
+
+        }
+
+
+
+    }, false);
+    </script> -->
+</body>
+
+</html>

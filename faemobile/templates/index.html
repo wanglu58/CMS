@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<title>安擎工作管理系统(手机版)</title>
+<meta name="viewport" content="initial-scale=1, maximum-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black">
+
+<link rel="stylesheet" href="/./static/css/sm.css">
+<link rel="stylesheet" href="/./static/css/sm-extend.css">
+<link rel="stylesheet" href="/./static/css/index.css">
+<style>
+        .list-block .item-inner:after {
+  position: absolute;
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  z-index: 15;
+  display: block;
+  width: 100%;
+  height: 1px;
+  content: '';
+  background-color: #e7e7e7;
+  -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+}
+.card-content-inner:after{
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: block;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: #e7e7e7;
+    -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+        }
+        .toptab{
+            height: 2rem;
+        }
+        
+        .buttons-tab{
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+        }
+    </style>
+
+</head>
+<body>
+  <!-- main page -->
+  <div class="page page-current" id="page-index">
+    <header class="bar bar-nav">
+      <a class="icon icon-menu button button-link pull-left open-panel"></a>
+      <a class="button button-link button-nav pull-right open-popup" data-popup=".popup-about"> 
+      <span class="icon icon-me"></span>
+      </a>
+      <h1 class="title">安擎工作管理系统(手机版)</h1>
+    </header>
+    <div class="content native-scroll" id="page-index">
+      <div id="content-operation" class="row">
+        <div class="col-100">
+          <div class="toptab">
+          <div class="buttons-tab">
+            <a href="#tab1" class="tab-link active button">系统公告</a>
+<!--            <a href="#tab2" class="tab-link button">搜索</a> -->
+          </div>
+          </div>
+          <div class="content-block">
+            <div class="tabs">
+              <div id="tab1" class="tab active">
+                                <div class="content-block">
+                                  <br>
+                                   
+
+<p style="height: 1.8rem;">&ensp;2.1更新说明：</p>
+1.更新手机版界面,可以直接用手机访问<br>
+2.导出导入优化,能同时操作三张表并自动命名<br>
+3.填表格时根据要求提示填写,适当回车排版<br>
+4.填写时打*的是必填项,否则会显示不能提交
+                        </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  {% include 'userpublic.html' %}
+  <script type='text/javascript' src='/./static/js/zepto.js' charset='utf-8'></script>
+  <script type='text/javascript' src='/./static/js/sm.js' charset='utf-8'></script>
+  <script type='text/javascript' src='/./static/js/sm-extend.js' charset='utf-8'></script>
+  <script type="text/javascript" src="/./static/js/index.js"></script>
+</body>
+</html>

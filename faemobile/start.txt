@@ -1,0 +1,26 @@
+
+create database faeinfo default charset utf8;
+
+python manage.py makemigrations
+
+python manage.py migrate
+
+python manage.py createsuperuser
+
+python manage.py runserver 0.0.0.0:8000
+
+
+
+function update(){
+        layer.open({
+            title: '主要更新说明',
+            content: '1.增加前台表单的修改功能<br>2.增加填写表单时的FAE姓名默认值<br>3.增加后台批量删除的功能<br>4.分页显示功能的优化(不管有多少分页，页面上最多显示5页)<br>\
+            5.销售和其他人员权限的判定优化<br>6.修改首页为登录页<br>7.表格日期格式的修改<br>8.修改或评价时可以看到已经填写的内容<br>9.数据库底层格式修改 等等'
+        });
+    }
+
+function update(){
+        layer.open({
+            title: '主要更新说明',
+            content: '1.前台页面颜色调整<br>2.管理人员前台页面增加更多搜索功能<br>3.管理人员权限调整<br>4.前台页面导出功能重构优化<br>5.前台页面增加用户名和密码强度的判定<br>6.网站标签logo的添加 等等'
+        });

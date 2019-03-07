@@ -1,0 +1,364 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>安擎工作管理系统</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <link rel="shortcut icon" href="/./static/images/favicon.ico"/>
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <script>
+    try {
+        if (window.console && window.console.log) {
+            console.log("%c此界面是采用django后端+layui前端写的。\n如有任何Bug或建议，可与我联系，互相学习！QQ:1366636606\nPowered by Wanglu", "color:#009688");
+        }
+    } catch (e) {};
+    </script>
+    <style>
+        .layui-nav .layui-nav-child dd.layui-this a, .layui-nav-child dd.layui-this {
+     background-color: #efeef0;
+     color: #000;
+}
+    </style>
+</head>
+
+<body>
+    <!-- 顶部开始 -->
+    <div class="container">
+        <div class="logo"><a href="#">安擎工作管理系统</a></div>
+        <div class="left_open">
+            <i title="展开左侧栏" class="iconfont">&#xe699;</i>
+        </div>
+        <ul class="layui-nav left fast-add" lay-filter="">
+        </ul>
+        <ul class="layui-nav right" lay-filter="">
+            <li class="layui-nav-item">
+                {% if not request.session.user_name %}
+                <a href="javascript:;"">欢迎 &nbsp;游客</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/userinfo/login">登录</a></dd>
+                <dd><a onclick="complete()">找回密码</a></dd>
+                </dl>
+                {% else %}
+                <a href="javascript:;">欢迎 &nbsp;{{ request.session.user_name }}</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/userinfo/changepwd">更改密码</a></dd>
+                    <dd><a href="/userinfo/logout">退出</a></dd>
+                    {% endif %}
+                </dl>
+            </li>
+            {% if request.session.user_department == '技术部' %}
+            <li class="layui-nav-item"><a>一键导出</a>
+                <dl class="layui-nav-child">
+                    <dd><a href="/forminfo/exportexcellastmonth">上月全部</a></dd>
+                    <dd><a href="/forminfo/exportexcelthismonth">本月全部</a></dd>
+                    <dd><a href="/forminfo/exportfaelast">上周全部</a></dd>
+                <dd><a href="/forminfo/exportfaethis"">本周全部</a></dd>
+                </dl>
+            </li>
+            {% endif %}
+        </ul>
+    </div>
+    <!-- 顶部结束 -->
+    <!-- 中部开始 -->
+    <!-- 左侧菜单开始 -->
+    <div class="left-nav">
+        <div id="side-nav">
+            <ul id="nav">
+                {% if request.session.user_department == '技术部' or request.session.user_department == None  %}
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>FAE工作管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/forminfo/plan">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>FAE方案管理</cite>
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/event">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>FAE事件管理</cite>
+                            
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/work">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>FAE日常管理</cite>
+                            
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>添加新的数据</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/forminfo/addform-plan/">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>FAE方案添加</cite>
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/addform-event">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>FAE事件添加</cite>
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/addform-work">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>FAE日常添加</cite>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>修改已有数据</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/forminfo/amend-plan">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>FAE方案修改</cite>
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/amend-event">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>FAE事件修改</cite>
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/amend-work">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>FAE日常修改</cite>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+                {% if request.session.user_department == '科技制造部'  %}
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>售后工作管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/serviceinfo/service">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>售后服务管理</cite>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>添加新的数据</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/serviceinfo/addservice">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>售后服务添加</cite>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>修改已有数据</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/serviceinfo/amendservice">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>售后服务修改</cite>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+                {% if request.session.user_department == '整机事业部' or request.session.user_department == '渠道事业部' %}
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>Sale工作管理</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/sellinfo/sellweek">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Sale周报</cite>
+                            
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/sellinfo/pipeline">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Sale行业</cite>
+                            
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>Sale工作添加</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/sellinfo/addsellweek">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Sale周报添加</cite>
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/sellinfo/addpipeline">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Sale行业添加</cite>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>Sale工作修改</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/sellinfo/amendsellweek">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Sale周报修改</cite>
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/sellinfo/amendpipeline">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>Sale行业修改</cite>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>技术支持查看</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/forminfo/plan">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>技术支持方案管理</cite>
+                            
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/event">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>技术支持事件管理</cite>
+                            
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/work">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>技术支持日常管理</cite>
+                            
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                <li>
+                    <a href="javascript:;">
+                    <i class="iconfont">&#xe723;</i>
+                    <cite>技术支持评价</cite>
+                    <i class="iconfont nav_right">&#xe697;</i>
+                </a>
+                    <ul class="sub-menu">
+                        <li>
+                            <a _href="/forminfo/planrevise">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>技术支持方案评价</cite>
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/eventrevise">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>技术支持事件评价</cite>
+                        </a>
+                        </li>
+                        <li>
+                            <a _href="/forminfo/workrevise">
+                            <i class="iconfont">&#xe6a7;</i>
+                            <cite>技术支持日常评价</cite>
+                        </a>
+                        </li>
+                    </ul>
+                </li>
+                {% endif %}
+        </div>
+    </div>
+    <!-- 左侧菜单结束 -->
+    <!-- 右侧主体开始 -->
+    <div class="page-content">
+        <div class="layui-tab tab" lay-filter="xbs_tab" lay-allowclose="false">
+            <ul class="layui-tab-title">
+                <li class="home"><i class="layui-icon">&#xe68e;</i>我的桌面</li>
+            </ul>
+            <div class="layui-tab-content">
+                <div class="layui-tab-item layui-show">
+                    <iframe src='/welcome' frameborder="0" scrolling="yes" class="x-iframe"></iframe>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="page-content-bg"></div>
+    <!-- 右侧主体结束 -->
+    <!-- 中部结束 -->
+    <!-- 底部开始 -->
+    <div class="footer">
+        <div class="copyright" align="center" style="cursor: default;">Copyright © 2019 安擎(天津)计算机有限公司 Powered by 安擎技术部</div>
+    </div>
+    <!-- 底部结束 -->
+    <script>
+    function complete() {
+        layer.open({
+            title: '通知',
+            content: '因安全性需要，无法自助找回。请联系管理员！'
+        });
+    }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>安擎工作管理系统(手机版)</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/./static/css/sm.css">
+    <link rel="stylesheet" href="/./static/css/sm-extend.css">
+    <link rel="stylesheet" href="/./static/css/index.css">
+    <style>
+        .list-block .item-inner:after {
+  position: absolute;
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  z-index: 15;
+  display: block;
+  width: 100%;
+  height: 1px;
+  content: '';
+  background-color: #e7e7e7;
+  -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+}
+.card-content-inner:after{
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: block;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: #e7e7e7;
+    -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+        }
+        .toptab{
+            height: 1.9rem;
+        }
+        
+        .buttons-tab{
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+        }
+    </style>
+    <!--     <link rel="stylesheet" href="/./static/css/font.css"> -->
+    <!--     <link rel="stylesheet" href="/./static/css/xadmin.css"> -->
+    <!--     <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script> -->
+</head>
+
+<body>
+    <!-- main page -->
+    <div class="page page-current" id="page-index">
+        <header class="bar bar-nav">
+            <a class="icon icon-menu button button-link pull-left open-panel"></a>
+            <a class="button button-link button-nav pull-right open-popup" data-popup=".popup-about">
+            <span class="icon icon-me"></span>
+            </a>
+            <h1 class="title">安擎工作管理系统(手机版)</h1>
+        </header>
+        <div class="content native-scroll" id="page-index">
+            <div id="content-operation" class="row">
+                <div class="col-100">
+                    <div class="toptab">
+                    <div class="buttons-tab">
+                        <a href="#tab1" class="tab-link active button">售后服务单修改</a>
+                        <!--                         <a href="#tab2" class="tab-link button">搜索</a> -->
+                    </div>
+                    </div>
+                    <div class="content-block">
+                        <div class="tabs">
+                            {% for form in form_detailone %}
+                            <div id="tab1" class="tab active">
+                                <form action="/serviceinfo/amendservicepost/" method="POST">
+                                    {% csrf_token %}
+                                    <div class="list-block">
+                                        <ul>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">*填表日期</div>
+                                                        <div class="item-input">
+                                                            <input type="date" name="filltime" autocomplete="off" placeholder="请输入时间" required="required"value="{{ form.filltime|date:'Y-m-d' }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">*填表人</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="servicename"  autocomplete="off" value="{{ request.session.user_name }}" value="{{ form.servicename }}" required="required">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;合作人</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="assistant1"  autocomplete="off" placeholder="填写和你一起负责此项目" value="{{ form.assistant1 }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;合作人</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="assistant2"  autocomplete="off" placeholder="的工程师名字，他将会看到" value="{{ form.assistant2 }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;合作人</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="assistant3"  autocomplete="off" placeholder="此售后单，如没有则不填。" value="{{ form.assistant3 }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;合作人</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="assistant4"  autocomplete="off" placeholder="同上。（最多填4位）" value="{{ form.assistant4 }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">*服务区域</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="area"  autocomplete="off"  required="required" value="{{ form.area }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">*销售姓名</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="sellname"  autocomplete="off"  required="required" value="{{ form.sellname }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">*客户姓名</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="customer"  autocomplete="off"  required="required" value="{{ form.customer }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;客户电话</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="phone"  autocomplete="off" placeholder="只能填数字" value="{{ form.phone }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;客户单位</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="company"  autocomplete="off" value="{{ form.company }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;客户地址</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="address"  autocomplete="off" value="{{ form.address }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;产品名称</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="productname"  autocomplete="off" value="{{ form.productname }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;产品型号</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="productmodel"  autocomplete="off" value="{{ form.productmodel }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;产品序列号</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="productid"  autocomplete="off" value="{{ form.productid }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;销售时间</div>
+                                                        <div class="item-input">
+                                                            <input type="date" name="salestime" autocomplete="off" value="{{ form.salestime|date:'Y-m-d' }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="align-top">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;故障现象描述</div>
+                                                        <div class="item-input">
+                                                            <textarea name="faultdescription">{{ form.faultdescription }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="align-top">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;故障现象记录</div>
+                                                        <div class="item-input">
+                                                            <textarea name="faultrecord">{{ form.faultrecord }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="align-top">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;故障处理结果</div>
+                                                        <div class="item-input">
+                                                            <textarea name="faultresult" placeholder="1次处理
+2次处理
+3次处理">{{ form.faultresult }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;意见</div>
+                                                        <select name="opinion" id="numbers">
+                                                            <option value="">请选择</option>
+                                                            <option value="满意">满意</option>
+                                                            <option value="尚可">尚可</option>
+                                                            <option value="不满意">不满意</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;具体意见</div>
+                                                        <div class="item-input">
+                                                            <textarea name="specificopinion" autocomplete="off">{{ form.specificopinion }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <div class="card-content-inner" style="text-align: left;"><a href="javascript:history.go(-2)"external>返回上一页</a></div>
+                                        </ul>
+                                    </div>
+                                    <div class="content-block">
+                                        <div class="row">
+                                            <div class="col-50" align="center"><button type="submit" class="button button-big button-fill button-success">立即提交</button></div>
+                                            <div class="col-50" align="center"><button type="reset" class="button button-big button-fill button-warning" ">重置</button></div>
+                                            </div>
+                                        </div>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'userpublic.html' %}
+                                            <script type='text/javascript' src='/./static/js/zepto.js' charset='utf-8'></script>
+                                            <script type='text/javascript' src='/./static/js/sm.js' charset='utf-8'></script>
+                                            <script type='text/javascript' src='/./static/js/sm-extend.js' charset='utf-8'></script>
+                                            <script type="text/javascript" src="/./static/js/index.js"></script>
+                                            <script>
+    function selectNumber(opinion) {
+        var numbers = $("#numbers").find('option');
+        for (var j = 1; j < numbers.length; j++) {
+            if ($(numbers[j]).val() == opinion) {
+                $(numbers[j]).attr('selected', 'selected');
+            }
+        }
+    }
+    selectNumber('{{ form.opinion }}');
+    </script>
+    {% endfor %}
+</body>
+
+</html>

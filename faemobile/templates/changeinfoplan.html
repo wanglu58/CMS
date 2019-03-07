@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>安擎工作管理系统(手机版)</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/./static/css/sm.css">
+    <link rel="stylesheet" href="/./static/css/sm-extend.css">
+    <link rel="stylesheet" href="/./static/css/index.css">
+    <style>
+        .list-block .item-inner:after {
+  position: absolute;
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  z-index: 15;
+  display: block;
+  width: 100%;
+  height: 1px;
+  content: '';
+  background-color: #e7e7e7;
+  -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+}
+.card-content-inner:after{
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: block;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: #e7e7e7;
+    -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+        }
+        .toptab{
+            height: 1.9rem;
+        }
+        
+        .buttons-tab{
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+        }
+    </style>
+    <!--     <link rel="stylesheet" href="/./static/css/font.css"> -->
+    <!--     <link rel="stylesheet" href="/./static/css/xadmin.css"> -->
+<!--     <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script> -->
+</head>
+
+<body>
+    <!-- main page -->
+    <div class="page page-current" id="page-index">
+        <header class="bar bar-nav">
+            <a class="icon icon-menu button button-link pull-left open-panel"></a>
+            <a class="button button-link button-nav pull-right open-popup" data-popup=".popup-about">
+            <span class="icon icon-me"></span>
+            </a>
+            <h1 class="title">安擎工作管理系统(手机版)</h1>
+        </header>
+        <div class="content native-scroll" id="page-index">
+            <div id="content-operation" class="row">
+                <div class="col-100">
+                    <div class="toptab">
+                    <div class="buttons-tab">
+                        <a href="#tab1" class="tab-link active button">方案管理</a>
+                        <a href="#tab2" class="tab-link button">评价</a>
+                    </div>
+                    </div>
+                    <div class="content-block">
+                        <div class="tabs">
+                            <div id="tab1" class="tab active">
+                                <div class="card">
+<!--                                     <div class="card-content"> -->
+                                        {% for form in form_detailone %}
+                                        <div class="card-content-inner">
+                                            姓名:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.fae_name }}<br>
+                                        </div>
+                                        <div class="card-content-inner">区域:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.area }}</div> 
+                                        <div class="card-content-inner">销售:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.sellname }}</div>
+                                        <div class="card-content-inner">客户名称:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.customer_name }}</div>
+                                        <div class="card-content-inner">数量:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.number }}</div>
+                                        <div class="card-content-inner">客户分类:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.customer_classification }}</div>
+                                        <div class="card-content-inner">项目名称:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.project_name }}</div>
+                                        <div class="card-content-inner">发起时间:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.start_date }}</div>
+                                        <div class="card-content-inner">要求回复时间:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.reply_date }}</div>
+                                        <div class="card-content-inner">预计用时:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.estimated_time }}分钟</div>
+                                        <div class="card-content-inner">过程描述: <br><br>{{ form.process|linebreaksbr}}</div>
+                                        
+                                        <div class="card-content-inner">结束时间:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.end_date }}</div>
+                                        <div class="card-content-inner">用时估算:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.estimate }}分钟</div>
+                                        <div class="card-content-inner">是否有问题:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.is_question }}</div>
+                                        <div class="card-content-inner">问题描述: <br><br>{{ form.question_describe|linebreaksbr}}</div>
+                                        <div class="card-content-inner">满意度评分:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.satisfaction_score| default_if_none:"" }}</div>
+                                        <div class="card-content-inner">评价:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.satisfaction }}</div>
+                                        <div class="card-content-inner">成交时间:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.transaction_time| default_if_none:"" }}</div>
+                                        <div class="card-content-inner">客户满意度:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.customer_satisfaction }}</div>
+                                        <div class="card-content-inner" style="text-align: left;"><a href="javascript:history.go(-2)"external>返回上一页</a></div>
+<!--                                     </div> -->
+                                </div>
+                            
+                            </div>
+                            <div id="tab2" class="tab">
+                                <div class="content-block">
+                                    <form action="/forminfo/planresult/" method="POST" id="form1">
+                                        {% csrf_token %}
+                                        <div class="list-block">
+                                            <ul>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">*是否有问题</div>
+                                                            <div class="item-input">
+                                                                <select name="is_question" required="required"  id="numbers">
+                                                                    <option value="">请选择</option>
+                                                                    <option value="否">否</option>
+                                                                    <option value="是">是</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">问题描述</div>
+                                                            <div class="item-input">
+                                                               <textarea name="question_describe">{{ form.question_describe }}</textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">*满意度评分</div>
+                                                            <div class="item-input">
+                                                                <select name="satisfaction_score" required="required" id="numbers1">
+                                                                    <option value="">请选择</option>
+                                                                    <option value="5">5</option>
+                                                                    <option value="4">4</option>
+                                                                    <option value="3">3</option>
+                                                                    <option value="2">2</option>
+                                                                    <option value="1">1</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">*评价</div>
+                                                            <div class="item-input">
+                                                                <select name="satisfaction" required="required" id="numbers2">
+                                                                    <option value="">请选择</option>
+                                                                    <option value="优秀">优秀</option>
+                                                                    <option value="良好">良好</option>
+                                                                    <option value="一般">一般</option>
+                                                                    <option value="待改进">待改进</option>
+                                                                    <option value="差">差</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">成交时间</div>
+                                                            <div class="item-input">
+                                                               <input type="date" name="transaction_time" value="{{ form.transaction_time|date:'Y-m-d' }}">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">*客户满意度</div>
+                                                            <div class="item-input">
+                                                                <select name="customer_satisfaction" required="required" id="numbers3">
+                                                                    <option value="">请选择</option>
+                                                                    <option value="优秀">优秀</option>
+                                                                    <option value="良好">良好</option>
+                                                                    <option value="一般">一般</option>
+                                                                    <option value="待改进">待改进</option>
+                                                                    <option value="差">差</option>
+                                                                </select>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
+                                        </div>
+                                        <div class="content-block">
+                                            <div class="row">
+                                                <div  align="center"><button type="submit" class="button button-big button-fill button-success" onclick="changeAction()">提交</button></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'userpublic.html' %}
+    <script type='text/javascript' src='/./static/js/zepto.js' charset='utf-8'></script>
+    <script type='text/javascript' src='/./static/js/sm.js' charset='utf-8'></script>
+    <script type='text/javascript' src='/./static/js/sm-extend.js' charset='utf-8'></script>
+    <script type="text/javascript" src="/./static/js/index.js"></script>
+    <script>
+    function changeAction() {
+        $('#form1').attr('action', '/forminfo/planresult/');
+        // console.log($('#form1').attr('action'));
+
+    }
+    </script>
+    <script>
+    function selectNumber(question) {
+        var numbers = $("#numbers").find('option');
+        for (var j = 1; j < numbers.length; j++) {
+            if ($(numbers[j]).val() == question) {
+                $(numbers[j]).attr('selected', 'selected');
+            }
+        }
+    }
+    selectNumber('{{ form.is_question }}')
+    
+    function selectNumber1(score) {
+        var numbers = $("#numbers1").find('option');
+        for (var j = 1; j < numbers.length; j++) {
+            if ($(numbers[j]).val() == score) {
+                $(numbers[j]).attr('selected', 'selected');
+            }
+        }
+    }
+    selectNumber1('{{ form.satisfaction_score }}')
+
+    function selectNumber2(satscore) {
+        var numbers = $("#numbers2").find('option');
+        for (var j = 1; j < numbers.length; j++) {
+            if ($(numbers[j]).val() == satscore) {
+                $(numbers[j]).attr('selected', 'selected');
+            }
+        }
+    }
+    selectNumber2('{{ form.satisfaction }}')
+
+    function selectNumber3(cusat) {
+        var numbers = $("#numbers3").find('option');
+        for (var j = 1; j < numbers.length; j++) {
+            if ($(numbers[j]).val() == cusat) {
+                $(numbers[j]).attr('selected', 'selected');
+            }
+        }
+    }
+    selectNumber3('{{ form.customer_satisfaction }}')
+    </script>
+        {% endfor %}
+</body>
+
+</html>

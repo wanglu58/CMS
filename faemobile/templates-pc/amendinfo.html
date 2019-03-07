@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>销售工作周报修改</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <style>
+        .layui-form-pane .layui-form-label{
+            width: 125px;
+            text-align: left;
+
+        }
+        .layui-form-pane .layui-form-text .layui-form-label{
+            width: 50%;
+        }
+    </style>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    {% if request.session.user_department != "整机事业部" and request.session.user_department != "渠道事业部" %}
+    <div class="x-body">
+        <xblock>您目前无权利填写！
+            <br>请返回<a href="/sellinfo/sellweek/" style="color: #009688"> 上一级 </a>或右上角关闭此选项卡。</xblock>
+    </div>
+    {% else %}
+    {% for form in form_detailone %}
+    <div class="x-body">
+        <form class="layui-form layui-form-pane" action="/sellinfo/updateinfo/" method="POST">
+            {% csrf_token %}
+            <div class="layui-form-item">
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span class="x-red">*</span>填表人</label>
+                    <div class="layui-input-inline">
+                        <input type="text" lay-verify="required" name="sellname" placeholder="请输入姓名" autocomplete="off" class="layui-input" value="{{ form.sellname }}">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>填表时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="filltime" id="start1" lay-verify="required" placeholder="请输入时间" value="{{ form.filltime|date:'Y-m-d' }}" autocomplete="off">
+                    </div>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span class="x-red">*</span>本周销售金额</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="salesamount" lay-verify="required|number" placeholder="请输入金额" autocomplete="off" class="layui-input" value="{{ form.salesamount }}">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">万元</div>
+                </div>
+                <div></div>
+                <div class="layui-form-item">
+                    <label class="layui-form-label"><span class="x-red">*</span>本周毛利金额</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="grossprofit" lay-verify="required|number" placeholder="请输入金额" autocomplete="off" class="layui-input" value="{{ form.grossprofit }}">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">万元</div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label"><span class="x-red">*</span>本周主要工作</label>
+                    <div class="layui-input-block">
+                        <textarea style="width: 50%" name="process" placeholder="  1.本周销售多少万元，毛利多少万元。
+  2.本周主要销售交付哪几家客户。
+  3.本周拜访计划实施情况，收获。
+  4.本周回款情况等。(填写时可敲回车适当排板) " class="layui-textarea" lay-verify="required">{{ form.process }}</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label"><span class="x-red">*</span>存在问题及建议</label>
+                    <div class="layui-input-block">
+                        <textarea style="width: 50%" name="question" placeholder="  至少2条起(填写时可敲回车适当排板)" class="layui-textarea" lay-verify="required">{{ form.question }}</textarea>
+                    </div>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label"><span class="x-red">*</span>下周工作安排</label>
+                    <div class="layui-input-block">
+                        <textarea style="width: 50%" name="nextprocess" class="layui-textarea" placeholder="  计划拜访哪几家新客户和老客户维系，工作安排等。(填写时可敲回车适当排板)" lay-verify="required">{{ form.nextprocess }}</textarea>
+                    </div>
+                </div>
+                <button class="layui-btn" lay-submit>立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary ">返回</a>
+            </div>
+        </form>
+    </div>
+    <script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start1' //指定元素
+        });
+
+    });
+    </script>
+    {% endfor %}
+    {% endif %}
+</body>
+
+</html>

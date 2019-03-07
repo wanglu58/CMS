@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>日常详情修改</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <style>
+    .layui-form-pane .layui-form-label {
+        width: 125px;
+        text-align: left;
+
+    }
+
+    .layui-form-pane .layui-form-text .layui-form-label {
+        width: 50%;
+    }
+    </style>
+</head>
+
+<body>
+    {% for form in form_detailone %}
+    <div class="x-body">
+        <div class="layui-form layui-form-pane">
+            <div class="layui-inline">
+                <label class="layui-form-label">Fae姓名</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.fae_name }}</label>
+            </div>
+            &nbsp;&nbsp;
+            <div class="layui-inline">
+                <label class="layui-form-label">区域</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.area }}</label>
+            </div>
+            <div></div><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.sellname }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">需求部门</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.demand }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户名称</label>
+                <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.customer_name }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">事物分类</label>
+                <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.customer_classification }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">发起时间</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.start_date }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预计用时</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.estimated_time }}分钟</label>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">过程描述</label>
+                <label class="layui-textarea" style="width: 50%">
+                    {{ form.process|linebreaksbr}}
+                </label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">结束时间</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.end_date }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用时估算</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.estimate }}分钟</label>
+            </div>
+        </div>
+    </div>
+    <div class="x-body">
+        <form class="layui-form layui-form-pane" action="/forminfo/workresult/" method="POST">
+            {% csrf_token %}
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>是否有问题</label>
+                <div class="layui-input-inline">
+                    <select name="is_question" lay-verify="required" lay-search id="numbers">
+                        <option value="">直接选择或搜索选择</option>
+                        <option value="否">否</option>
+                        <option value="是">是</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">问题描述</label>
+                <div class="layui-input-block">
+                    <textarea style="width: 50%" name="question_describe" class="layui-textarea">{{ form.question_describe }}</textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>满意度评分</label>
+                <div class="layui-input-inline">
+                    <select name="satisfaction_score" lay-verify="required" lay-search id="numbers1">
+                        <option value="">直接选择或搜索选择</option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                        <option value="4">4</option>
+                        <option value="5">5</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>评价</label>
+                <div class="layui-input-inline">
+                    <select name="satisfaction" lay-verify="required" lay-search id="numbers2">
+                        <option value="">直接选择或搜索选择</option>
+                        <option value="差">差</option>
+                        <option value="待改进">待改进</option>
+                        <option value="一般">一般</option>
+                        <option value="良好">良好</option>
+                        <option value="优秀">优秀</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">完成时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="transaction_time" id="start3"  placeholder="请输入时间" autocomplete="off" value="{{ form.transaction_time|date:'Y-m-d' }}">
+                </div>
+            </div>
+            <button class="layui-btn" lay-submit>立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary ">返回</a>
+        </form>
+    </div>
+    <script>
+    function selectNumber(question) {
+        var numbers = $("#numbers").find('option');
+        for (var j = 1; j < numbers.length; j++) {
+            if ($(numbers[j]).val() == question) {
+                $(numbers[j]).attr('selected', 'selected');
+            }
+        }
+    }
+    selectNumber('{{ form.is_question }}')
+
+    function selectNumber1(score) {
+        var numbers = $("#numbers1").find('option');
+        for (var j = 1; j < numbers.length; j++) {
+            if ($(numbers[j]).val() == score) {
+                $(numbers[j]).attr('selected', 'selected');
+            }
+        }
+    }
+    selectNumber1('{{ form.satisfaction_score }}')
+
+    function selectNumber2(satscore) {
+        var numbers = $("#numbers2").find('option');
+        for (var j = 1; j < numbers.length; j++) {
+            if ($(numbers[j]).val() == satscore) {
+                $(numbers[j]).attr('selected', 'selected');
+            }
+        }
+    }
+    selectNumber2('{{ form.satisfaction }}')
+    </script>
+    <script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start3' //指定元素
+        });
+
+    });
+    layui.use('util', function() {
+        var util = layui.util;
+        util.fixbar({
+            bar2: true,
+            css: { right: 100, bottom: 20 },
+            click: function(type) {
+                if (type === 'bar2') {
+                    layer.open({
+                        title: '备注',
+                        // area: '500px',
+                        content: '1、按照上面的信息进行打分评价。\
+  <br />2、打*的是必填项,否则会无法提交。<br />3、问题描述可以回车换行来进行排版。'
+                    });
+                }
+            }
+        });
+    });
+    </script>
+    <script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+});
+</script>
+    {% endfor %}
+</body>

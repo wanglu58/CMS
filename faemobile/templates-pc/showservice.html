@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>售后服务单查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <style>
+        .layui-form-pane .layui-form-label {
+        width: 125px;
+        text-align: left;
+
+    }
+
+    .layui-form-pane .layui-form-text .layui-form-label {
+        width: 50%;
+    }
+    </style>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    {% if request.session.user_department != "科技制造部" %}
+    <div class="x-body">
+        <xblock>您目前无权利查看！
+            <br>请返回<a href="/serviceinfo/service/" style="color: #009688"> 上一级 </a>或右上角关闭此选项卡。</xblock>
+    </div>
+    {% else %}
+    <div class="x-body">
+        <div class="layui-form layui-form-pane">
+            <div class="layui-form-item">
+                {% for form in form_detailone %}
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>填表人</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.servicename }}</label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>填表日期</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.filltime }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作人</label>
+                        <label class="layui-input-inline" style="width: 114px;">
+                            <label class="layui-form-label" style="background-color:#fff; width:114px; ">{{ form.assistant1 }}</label>
+                        </label>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 114px;">
+                            <label class="layui-form-label" style="background-color:#fff; width: 114px;">{{ form.assistant2 }}</label>
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <label class="layui-input-inline" style="width: 114px;">
+                            <label class="layui-form-label" style="background-color:#fff; width: 114px;">{{ form.assistant3 }}</label>
+                        </label>
+                        <div class="layui-form-mid">-</div>
+                        <label class="layui-input-inline" style="width: 114px;">
+                            <label class="layui-form-label" style="background-color:#fff; width: 114px;">{{ form.assistant4 }}</label>
+                        </label>
+                        <div class="layui-form-mid layui-word-aux">和你一起负责此项目的工程师名字，他也会看到此售后单。</div>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>服务区域</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.area }}</label>
+                </div>
+                <!--                 <div></div><br> -->
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>销售姓名</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.sellname }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>客户姓名</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color:#fff ">{{ form.customer }}</label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">客户电话</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.phone }}</label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">客户单位</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.company }}</label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">客户地址</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.address }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label">产品名称</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.productname }}</label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">产品型号</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.productmodel }}</label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">产品序列号</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.productid }}</label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">销售时间</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.salestime|default_if_none:"" }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">故障现象描述</label>
+                    <label class="layui-textarea" style="width: 50%">
+                        {{ form.faultdescription|linebreaksbr }}
+                    </label>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">故障处理记录</label>
+                    <label class="layui-textarea" style="width: 50%">
+                        {{ form.faultrecord|linebreaksbr }}
+                    </label>
+                </div>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">故障处理结果</label>
+                    <label class="layui-textarea" style="width: 50%">
+                        {{ form.faultresult|linebreaksbr }}
+                    </label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">意见</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.opinion|default_if_none:"" }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">具体意见</label>
+                    <label class="layui-textarea" style="width: 50%">
+                        {{ form.specificopinion|linebreaksbr }}
+                    </label>
+                </div>
+                <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary ">返回</a>
+            </div>
+        </div>
+    </div>
+    <script>
+    layui.use('util', function() {
+        var util = layui.util;
+        //执行一个bar实例
+        util.fixbar({
+            css: { right: 100, bottom: 20 },
+        });
+    });
+    </script>
+    {% endfor %}
+    {% endif %}
+</body>
+
+</html>

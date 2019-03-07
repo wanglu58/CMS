@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>方案增加</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <style>
+        .layui-form-pane .layui-form-label{
+            width: 125px;
+            text-align: left;
+
+        }
+        .layui-form-pane .layui-form-text .layui-form-label{
+            width: 50%;
+        }
+    </style>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    {% if not request.session.user_department == "技术部" and not request.session.user_department == "产品中心" %}
+    <div class="x-body">
+        <xblock>您目前无权利填写！
+            <br>请返回<a href="/forminfo/plan/" style="color: #009688"> 上一级 </a>或右上角关闭此选项卡。</xblock>
+    </div>
+    {% else %}
+    <div class="x-body">
+        <form class="layui-form layui-form-pane" action="/forminfo/addinfoplan/" method="POST">
+            {% csrf_token %}
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>Fae姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" lay-verify="required" name="fae_name" autocomplete="off" class="layui-input" value="{{ request.session.user_name }}">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>区域</label>
+                <div class="layui-input-inline">
+                    <select name="area" lay-verify="required" lay-search>
+                        <option value="">直接选择或搜索选择</option>
+                        <option value="南京">南京</option>
+                        <option value="北京">北京</option>
+                        <option value="深圳">深圳</option>
+                        <option value="武汉">武汉</option>
+                        <option value="成都">成都</option>
+                        <option value="西安">西安</option>
+                    </select>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>销售</label>
+                <div class="layui-input-inline">
+                    <input type="text" lay-verify="required" name="sellname" autocomplete="off" placeholder="请务必输入实际姓名" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="customer_name" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>数量</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="number" lay-verify="required|number" min="1" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户分类</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="customer_classification" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">项目名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="project_name" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>发起时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="start_date" id="start" autocomplete="off" lay-verify="required" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>要求回复时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="reply_date" autocomplete="off" lay-verify="required" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>预计用时</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="estimated_time" lay-verify="required|number" min="1" autocomplete="off" class="layui-input">
+                </div>
+                <div class="layui-form-mid layui-word-aux">分钟</div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label"><span class="x-red">*</span>过程描述</label>
+                <div class="layui-input-block">
+                    <textarea style="width: 50%" name="process" class="layui-textarea" lay-verify="required"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>结束时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="end_date" id="start1" autocomplete="off" lay-verify="required" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label"><span class="x-red">*</span>用时估算</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="estimate" autocomplete="off" lay-verify="required|number" class="layui-input" >
+                </div>
+                <div class="layui-form-mid layui-word-aux">分钟</div>
+            </div>
+            <button class="layui-btn" lay-submit>立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary ">返回</a>
+        </form>
+    </div>
+    <script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start1' //指定元素
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+    });
+    layui.use('util', function() {
+        var util = layui.util;
+        //执行一个bar实例
+        util.fixbar({
+            bar2: true,
+            css: { right: 100, bottom: 20 },
+            click: function(type) {
+                if (type === 'bar2') {
+                    layer.open({
+                        title: '备注',
+                        // area: '500px',
+                        content: '1、预计用时和用时估算以分钟为单位填写。\
+  <br />2、打*的是必填项,否则会无法提交。<br />3、过程描述可以回车换行来进行排版。'
+                    });
+                }
+            }
+        });
+    });
+    </script>
+    <script>
+//Demo
+layui.use('form', function(){
+  var form = layui.form;
+});
+</script>
+    {% endif %}
+</body>
+
+</html>

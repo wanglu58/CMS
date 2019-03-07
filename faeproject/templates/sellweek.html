@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>周报首页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        html,
+    body {
+        overflow-x: auto;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="x-body">
+        {% if request.session.user_name != "梅苹华" %}
+        <div class="layui-row">
+            <form action="/sellinfo/sellweek/" method="POST" class="layui-form layui-col-md12 x-so" id="form">&nbsp; {% csrf_token %}
+                <input class="layui-input" placeholder="填表时间" name="show_timestart" id="start">开始&ensp;
+                <input class="layui-input" placeholder="填表时间" name="show_timeend" id="end">结束&emsp;
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction2()"><i class="layui-icon">&#xe615;</i>查询</button>
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction3()"><i class="layui-icon">&#xe681;</i>按条件导出</button>
+            </form>
+        </div>
+        {% endif %}
+        {% if request.session.user_name == "梅苹华" %}
+        <div class="layui-row">
+            <form action="/sellinfo/sellweek/" method="POST" class="layui-form layui-col-md12 x-so" id="form1">&nbsp; {% csrf_token %}
+                <input type="text" name="show_name" placeholder="姓名" autocomplete="off" class="layui-input">姓名&ensp;
+                <input class="layui-input" placeholder="填表时间" name="show_timestart" id="start1">开始&ensp;
+                <input class="layui-input" placeholder="填表时间" name="show_timeend" id="end1">结束&emsp;
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction()"><i class="layui-icon">&#xe615;</i>查询</button>
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction1()"><i class="layui-icon">&#xe681;</i>按条件导出</button>
+            </form>
+        </div>
+        {% endif %}
+        <xblock>
+            {% if request.session.user_department == '整机事业部' or request.session.user_department == '渠道事业部' %}
+            <a href="/sellinfo/addsellweek" class="layui-btn">   <i class="layui-icon">&#xe608;</i>添加新的工作周报</a>&ensp;
+            <a href="/sellinfo/amendsellweek" class="layui-btn">   <i class="layui-icon">&#xe608;</i>修改已有的工作周报</a>&ensp;
+            {% endif %}
+        </xblock>
+        <div class="layui-btn layui-btn-normal layui-btn-sm layui-btn-radius">
+            工作周报
+        </div>
+        <table class="layui-table" lay-size="sm">
+            <thead>
+                <th>填表人</th>
+                <th>填表时间</th>
+                <th>本周销售金额</th>
+                <th>本周毛利金额</th>
+                <th>本周主要工作</th>
+                <th>存在问题及建议</th>
+                <th>下周工作安排</th>
+            </thead>
+            <tbody>
+                {% load pagetag %}
+                {% for info in sellinfoweekly %}
+                <tr>
+                    <td style="white-space: nowrap;"><a href="{{ info.formdetail_url }}" style="color: #009688">{{ info.sellname }}</a></td>
+                    <td style="white-space: nowrap;">{{ info.filltime }}</td>
+                    <td style="white-space: nowrap;">{{ info.salesamount }}</td>
+                    <td style="white-space: nowrap;">{{ info.grossprofit }}</td>
+                    {% if info.process|length >= 34 %}
+                    <td>{{ info.process|slice:"34"|linebreaksbr }}......</td>
+                    {% else %}
+                    <td>{{ info.process|linebreaksbr }}</td>
+                    {% endif %}
+                    {% if info.question|length >= 34 %}
+                    <td>{{info.question|slice:"34"|linebreaksbr}}......</td>
+                    {% else %}
+                    <td>{{info.question|linebreaksbr}}</td>
+                    {% endif %}
+                    {% if info.nextprocess|length >= 34 %}
+                    <td>{{ info.nextprocess|slice:"34"|linebreaksbr }}......</td>
+                    {% else %}
+                    <td width="28%">{{ info.nextprocess|linebreaksbr }}</td>
+                    {% endif %}
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <div class="page">
+            <div>
+                {% if sellinfoweekly.has_previous %}
+                <a class="prev" href="?page={{ sellinfoweekly.previous_page_number}}">&lt;&lt;</a> {% endif %}{% for pg in sellinfoweekly.paginator.page_range %}
+                {% circle_page sellinfoweekly.number pg %}
+                {% endfor %}
+                {% if sellinfoweekly.has_next %}
+                <a class="next" href="?page={{ sellinfoweekly.next_page_number }}">&gt;&gt;</a> {% endif %}
+            </div>
+        </div>
+    </div>
+    <script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start1' //指定元素
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end1' //指定元素
+        });
+    });
+
+    function changeAction() {
+        $('#form1').attr('action', '/sellinfo/sellweek/');
+        // console.log($('#form1').attr('action'));
+
+    }
+
+    function changeAction1() {
+        $('#form1').attr('action', '/sellinfo/exportsellweek/');
+        // console.log($('#form1').attr('action'));
+
+    }
+
+    function changeAction2() {
+        $('#form').attr('action', '/sellinfo/sellweek/');
+        // console.log($('#form').attr('action'));
+
+    }
+
+    function changeAction3() {
+        $('#form').attr('action', '/sellinfo/exportsellweek/');
+        // console.log($('#form').attr('action'));
+
+    }
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>日常首页</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+    <style>
+        html,
+    body {
+        overflow-x: auto;
+    }
+    </style>
+</head>
+
+<body>
+    <div class="x-body">
+        {% if request.session.user_name != "陈武" %}
+        <div class="layui-row">
+            <form action="/forminfo/work/" method="POST" class="layui-form layui-col-md12 x-so" id="form">&nbsp; {% csrf_token %}
+                <input class="layui-input" placeholder="发起时间" name="show_timeplan" id="start">开始&ensp;
+                <input class="layui-input" placeholder="发起时间" name="show_timeevent" id="end">结束&emsp;
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction2()"><i class="layui-icon">&#xe615;</i>查询</button>
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction3()"><i class="layui-icon">&#xe681;</i>按条件导出</button>
+            </form>
+        </div>
+        {% endif %}
+        {% if request.session.user_name == "陈武" %}
+        <div class="layui-row">
+            <form action="/forminfo/work/" method="POST" class="layui-form layui-col-md12 x-so" id="form1">&nbsp; {% csrf_token %}
+                <input type="text" name="show_name" placeholder="姓名" autocomplete="off" class="layui-input">姓名&ensp;
+                <input type="text" name="show_area" placeholder="地区" autocomplete="off" class="layui-input">区域&ensp;
+                <input type="text" name="show_sellname" placeholder="姓名" autocomplete="off" class="layui-input">需求者姓名&ensp;
+                <input class="layui-input" placeholder="发起时间" name="show_timeplan" id="start1">开始&ensp;
+                <input class="layui-input" placeholder="发起时间" name="show_timeevent" id="end1">结束&emsp;
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction()"><i class="layui-icon">&#xe615;</i>查询</button>
+                <button type="submit" class="layui-btn layui-btn-radius" onclick="changeAction1()"><i class="layui-icon">&#xe681;</i>按条件导出</button>
+            </form>
+        </div>
+        {% endif %}
+        <xblock>
+            {% if request.session.user_department != '整机事业部' and request.session.user_department != '渠道事业部' %}
+            <a href="/forminfo/addform-work" class="layui-btn"><i class="layui-icon">&#xe608;</i>添加新的日常管理</a>&ensp;
+            <a href="/forminfo/amend-work" class="layui-btn">   <i class="layui-icon">&#xe608;</i>修改已有的日常管理</a>&ensp;
+            <button class="layui-btn" onclick="x_admin_show('日常管理-导入测试','/forminfo/excelwork/',350,180)"><i class="layui-icon"></i>导入多条日常管理</button>
+            {% endif %}
+            {% if request.session.user_department == '整机事业部' or request.session.user_department == '渠道事业部' %}
+            <a href="/forminfo/workrevise" class="layui-btn"><i class="layui-icon">&#xe608;</i>评价已有的日常管理</a>
+            {% endif %}
+        </xblock>
+        <div><div class="layui-btn layui-btn-normal layui-btn-sm layui-btn-radius">
+            日常管理
+        </div><a href="/forminfo/exportfaeworkquestion" style="float: right;color: #009688;line-height: 39px;font-size: 13.2px">* 查看有问题的日常&nbsp;&nbsp;</a><a href="/forminfo/exportfaeworkcomment" style="float: right;color: #009688;line-height: 39px;font-size: 13.2px">* 查看有评论反馈的日常&nbsp;&nbsp;</a></div>
+        <table class="layui-table" lay-size="sm">
+            <thead>
+                <th>姓名</th>
+                <th>区域</th>
+                <th>姓名</th>
+                <th>需求部门</th>
+                <th>客户名称</th>
+                <th>事物分类</th>
+                <th>发起时间</th>
+                <th>预计用时</th>
+                <th>过程描述</th>
+                <th>结束时间</th>
+                <th>用时估算</th>
+                <th>是否有问题</th>
+                <th>问题描述</th>
+                <th>满意度评分</th>
+                <th>评价</th>
+                <th>完成时间</th>
+            </thead>
+            <tbody>
+                {% load pagetag %}
+                {% for info in Forminfowork %}
+                <tr>
+                    <td style="white-space: nowrap;"><a href="{{ info.showdetail_url }}" style="color: #009688">{{ info.fae_name }}</a></td>
+                    <td style="white-space: nowrap;">{{ info.area }}</td>
+                    <td style="white-space: nowrap;">{{ info.sellname }}</td>
+                    <td>{{ info.demand }}</td>
+                    <td width="5%">{{ info.customer_name }}</td>
+                    <td>{{ info.customer_classification }}</td>
+                    <td>{{ info.start_date }}</td>
+                    <td>{{ info.estimated_time }}分钟</td>
+                    {% if info.process|length >= 34 %}
+                    <td width="10%">{{ info.process|slice:"34"|linebreaksbr }}......</td>
+                    {% else %}
+                    <td width="10%">{{ info.process|linebreaksbr }}</td>
+                    {% endif %}
+                    <td>{{ info.end_date }}</td>
+                    <td>{{ info.estimate }}分钟</td>
+                    <td>
+                        {{ info.is_question|default_if_none:"" }}
+                    </td>
+                    {% if info.question_describe|length >= 34 %}
+                    <td width="8%">
+                        {{ info.question_describe|slice:"34"|linebreaksbr }}......
+                    </td>
+                    {% else %}
+                    <td width="8%">
+                        {{ info.question_describe|linebreaksbr|default_if_none:"" }}
+                    </td>
+                    {% endif %}
+                    <td>
+                        {{info.satisfaction_score|default_if_none:"" }}
+                    </td>
+                    <td>
+                        {{ info.satisfaction|default_if_none:"" }}</td>
+                    <td>
+                        {{ info.transaction_time|default_if_none:"" }}
+                    </td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+        <br>
+        <div class="page">
+            <div>
+                <!-- {% if Forminfowork.has_previous %}
+                <a class="prev" href="?page={{ Forminfowork.previous_page_number}}">&lt;&lt;</a> {% endif %} {% for pg in Forminfowork.paginator.page_range %} {% if Forminfowork.number == pg %}
+                <span class="current" href="?page={{ pg }}">{{ pg }}</span> {% else %}
+                <a class="num" href="?page={{ pg }}">{{ pg }}</a> {% endif %} {% endfor %} {% if Forminfowork.has_next %}
+                <a class="next" href="?page={{ Forminfowork.next_page_number }}">&gt;&gt;</a> {% endif %} -->
+                {% if Forminfowork.has_previous %}
+                <a class="prev" href="?page={{ Forminfowork.previous_page_number}}">&lt;&lt;</a> {% endif %}{% for pg in Forminfowork.paginator.page_range %}
+                {% circle_page Forminfowork.number pg %}
+                {% endfor %}
+                {% if Forminfowork.has_next %}
+                <a class="next" href="?page={{ Forminfowork.next_page_number }}">&gt;&gt;</a> {% endif %}
+            </div>
+        </div>
+    </div>
+    <script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start' //指定元素
+        });
+
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end' //指定元素
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start1' //指定元素
+        });
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#end1' //指定元素
+        });
+    });
+
+    function changeAction() {
+        $('#form1').attr('action', '/forminfo/work/');
+        // console.log($('#form1').attr('action'));
+
+    }
+
+    function changeAction1() {
+        $('#form1').attr('action', '/forminfo/exportfaework/');
+        // console.log($('#form1').attr('action'));
+
+    }
+
+    function changeAction2() {
+        $('#form').attr('action', '/forminfo/work/');
+        // console.log($('#form').attr('action'));
+
+    }
+
+    function changeAction3() {
+        $('#form').attr('action', '/forminfo/exportfaework/');
+        // console.log($('#form').attr('action'));
+
+    }
+    </script>
+</body>
+
+</html>

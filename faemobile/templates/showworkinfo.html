@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>安擎工作管理系统(手机版)</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/./static/css/sm.css">
+    <link rel="stylesheet" href="/./static/css/sm-extend.css">
+    <link rel="stylesheet" href="/./static/css/index.css">
+    <style>
+        .list-block .item-inner:after {
+  position: absolute;
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  z-index: 15;
+  display: block;
+  width: 100%;
+  height: 1px;
+  content: '';
+  background-color: #e7e7e7;
+  -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+}
+.card-content-inner:after{
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: block;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: #e7e7e7;
+    -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+        }
+        .toptab{
+            height: 1.9rem;
+        }
+        
+        .buttons-tab{
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+        }
+    </style>
+</head>
+
+<body>
+    <!-- main page -->
+    <div class="page page-current" id="page-index">
+        <header class="bar bar-nav">
+            <a class="icon icon-menu button button-link pull-left open-panel"></a>
+            <a class="button button-link button-nav pull-right open-popup" data-popup=".popup-about">
+            <span class="icon icon-me"></span>
+            </a>
+            <h1 class="title">安擎工作管理系统(手机版)</h1>
+        </header>
+        <div class="content native-scroll" id="page-index">
+            <div id="content-operation" class="row">
+                <div class="col-100">
+                    <div class="toptab">
+                    <div class="buttons-tab">
+                        <a href="#tab1" class="tab-link active button">日常管理</a>
+                        <a href="#tab2" class="tab-link button">搜索</a>
+                    </div>
+                    </div>
+                    <div class="content-block">
+                        <div class="tabs">
+                            <div id="tab1" class="tab active">
+                                <div class="card">
+<!--                                     <div class="card-content"> -->
+                                        {% for form in form_detailone %}
+                                        <div class="card-content-inner">
+                                            姓名:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.fae_name }}<br>
+                                        </div>
+                                        <div class="card-content-inner">区域:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.area }}</div> 
+                                        <div class="card-content-inner">需求者姓名:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.sellname }}</div>
+                                        <div class="card-content-inner">需求部门:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.demand }}</div>
+                                        <div class="card-content-inner">客户名称:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.customer_name }}</div>
+                                        <div class="card-content-inner">事务分类:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.customer_classification }}</div>
+                                        <div class="card-content-inner">发起时间:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.start_date }}</div>
+                                        <div class="card-content-inner">预计用时:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.estimated_time }}分钟</div>
+                                        <div class="card-content-inner">过程描述: <br><br>{{ form.process|linebreaksbr}}</div>
+                                        
+                                        <div class="card-content-inner">结束时间:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.end_date }}</div>
+                                        <div class="card-content-inner">用时估算:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.estimate }}分钟</div>
+                                        <div class="card-content-inner">是否有问题:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.is_question }}</div>
+                                        <div class="card-content-inner">问题描述: <br><br>{{ form.question_describe|linebreaksbr}}</div>
+                                        <div class="card-content-inner">满意度评分:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.satisfaction_score| default_if_none:"" }}</div>
+                                        <div class="card-content-inner">评价:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.satisfaction }}</div>
+                                        <div class="card-content-inner">完成时间:&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;{{ form.transaction_time| default_if_none:"" }}</div>
+                                        <div class="card-content-inner" style="text-align: left;"><a href="javascript:history.go(-2)"external>返回上一页</a></div>
+<!--                                     </div> -->
+                                </div>
+                                {% endfor %}
+                            </div>
+                            <div id="tab2" class="tab">
+                                <div class="content-block">
+                                    <form action="/forminfo/work/" method="POST" id="form1">
+                                        {% csrf_token %}
+                                        <div class="list-block">
+                                            <ul>
+                                                {% if request.session.user_name == "陈武" %}
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-media"><i class="icon icon-card"></i></div>
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">姓名</div>
+                                                            <div class="item-input">
+                                                                <input type="text" name="show_name" autocomplete="off" placeholder="名字">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-media"><i class="icon icon-home"></i></div>
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">区域</div>
+                                                            <div class="item-input">
+                                                                <input type="text" name="show_area" placeholder="地区" autocomplete="off">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-media"><i class="icon icon-card"></i></div>
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">需求者姓名</div>
+                                                            <div class="item-input">
+                                                                <input type="text" name="show_sellname" autocomplete="off" placeholder="名字">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-media"><i class="icon icon-clock"></i></div>
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">发起时间</div>
+                                                            <div class="item-input">
+                                                                <input type="date" name="show_timeplan" autocomplete="off" placeholder="填表时间(开始)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-media"><i class="icon icon-clock"></i></div>
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">发起时间</div>
+                                                            <div class="item-input">
+                                                                <input type="date" name="show_timeevent" autocomplete="off" placeholder="填表时间(结束)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                {% else %}
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-media"><i class="icon icon-clock"></i></div>
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">发起时间</div>
+                                                            <div class="item-input">
+                                                                <input type="date" name="show_timeplan" autocomplete="off" placeholder="填表时间(开始)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                <li>
+                                                    <div class="item-content">
+                                                        <div class="item-media"><i class="icon icon-clock"></i></div>
+                                                        <div class="item-inner">
+                                                            <div class="item-title label">发起时间</div>
+                                                            <div class="item-input">
+                                                                <input type="date" name="show_timeevent" autocomplete="off" placeholder="填表时间(结束)">
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                {% endif %}
+                                            </ul>
+                                        </div>
+                                        <div class="content-block">
+                                            <div class="row">
+                                                <div class="col-50" align="center"><button type="submit" class="button button-big button-fill button-success" onclick="changeAction()">查询</button></div>
+                                                <div class="col-50" align="center"><button type="submit" class="button button-big button-fill button-warning" onclick="changeAction1()">导出</button></div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'userpublic.html' %}
+    <script type='text/javascript' src='/./static/js/zepto.js' charset='utf-8'></script>
+    <script type='text/javascript' src='/./static/js/sm.js' charset='utf-8'></script>
+    <script type='text/javascript' src='/./static/js/sm-extend.js' charset='utf-8'></script>
+    <script type="text/javascript" src="/./static/js/index.js"></script>
+    <script>
+    function changeAction() {
+        $('#form1').attr('action', '/forminfo/work/');
+        // console.log($('#form1').attr('action'));
+
+    }
+
+    function changeAction1() {
+        $('#form1').attr('action', '/forminfo/exportfaework/');
+        // console.log($('#form1').attr('action'));
+
+    }
+    </script>
+</body>
+
+</html>

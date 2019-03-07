@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>销售pipeline周报查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <style>
+        .layui-form-pane .layui-form-label{
+            width: 125px;
+            text-align: left;
+
+        }
+        .layui-form-pane .layui-form-text .layui-form-label{
+            width: 50%;
+        }
+        body {
+        overflow-x: auto;
+    }
+    </style>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    {% if request.session.user_department != "整机事业部" and request.session.user_department != "渠道事业部" %}
+    <div class="x-body">
+        <xblock>您目前无权利填写！
+            <br>请返回<a href="/sellinfo/pipeline/" style="color: #009688"> 上一级 </a>或右上角关闭此选项卡。</xblock>
+    </div>
+    {% else %}
+    <div class="x-body">
+        <div class="layui-form layui-form-pane" >
+            {% for form in form_detailone %}
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>更新时间</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.filltime }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>区域</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.area }}</label>
+                    </div>
+                </div>
+<!--                 <div></div><br> -->
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>跟进销售</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.sellname }}</label>
+                </div>
+                &nbsp;&nbsp;
+                 <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>客户名称</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.customer_name }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label">客户分类</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.customer_classification }}</label>
+                </div>
+                &nbsp;&nbsp;
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目名称</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.project_name }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">在该项目中的优势</label>
+                    <label class="layui-textarea" style="width: 50%">
+                        {{ form.advantage|linebreaksbr }}
+                    </label>
+                </div>
+                <div></div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目关键人</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.keyperson }}</label>
+                </div>
+                &nbsp;&nbsp;
+                <div class="layui-inline">
+                    <label class="layui-form-label">关键人职务</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.keypersonduties }}</label>
+                </div>
+                &nbsp;&nbsp;
+                <div class="layui-inline">
+                    <label class="layui-form-label">电话号码</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.phone }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label">首次接触时间</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.firsttime| default_if_none:"" }}</label>
+                </div>
+                &nbsp;&nbsp;
+                <div class="layui-inline">
+                    <label class="layui-form-label">需求产品型号</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.demandtype }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label">需求数量</label>
+                    {% if form.demandnumber == None %}
+                    <label class="layui-form-label" style="background-color:#fff "></label>
+                    {% else %}
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.demandnumber }}K</label>
+                    {% endif %}
+                </div>
+                &nbsp;&nbsp;
+                <div class="layui-inline">
+                    <label class="layui-form-label">竞品型号</label>
+                    <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.competitor }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">竞品优势</label>
+                    <label class="layui-textarea" style="width: 50%">
+                        {{ form.competitoradvantage|linebreaksbr }}
+                    </label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">预计下单时间</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.expected }}</label>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">本周跟进内容</label>
+                    <label class="layui-textarea" style="width: 50%">
+                        {{ form.process|linebreaksbr }}
+                    </label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">赢单率</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{%  widthratio form.winrate 1 100 %}</label>
+                    <div class="layui-form-mid layui-word-aux">%</div>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">下一步跟进计划及需要支持</label>
+                    <label class="layui-textarea" style="width: 50%">
+                        {{ form.planprocess|linebreaksbr }}
+                    </label>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">计划行动时间</label>
+                    <label class="layui-form-label" style="background-color:#fff ">{{ form.plantime| default_if_none:"" }}</label>
+                </div>
+                <div></div><br>
+                <div>
+                <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary ">返回</a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+    layui.use('util', function() {
+        var util = layui.util;
+
+        //执行
+        util.fixbar({
+            css: { right: 100, bottom: 20 }
+        });
+    });
+    </script>
+    {% endfor %}
+    {% endif %}
+</body>
+
+</html>

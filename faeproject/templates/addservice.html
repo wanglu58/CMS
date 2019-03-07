@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>售后服务单添加</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <style>
+        .layui-form-pane .layui-form-label{
+            width: 125px;
+            text-align: left;
+
+        }
+        .layui-form-pane .layui-form-text .layui-form-label{
+            width: 50%;
+        }
+    </style>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    {% if request.session.user_department != "科技制造部" %}
+    <div class="x-body">
+        <xblock>您目前无权利填写！
+            <br>请返回<a href="/serviceinfo/service/" style="color: #009688"> 上一级 </a>或右上角关闭此选项卡。</xblock>
+    </div>
+    {% else %}
+    <div class="x-body">
+        <form class="layui-form layui-form-pane" action="/serviceinfo/addservicepost/" method="POST">
+            {% csrf_token %}
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>填表日期</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="filltime" id="start1" lay-verify="required" placeholder="请输入时间" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>填表人</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="servicename" lay-verify="required" autocomplete="off" class="layui-input" value="{{ request.session.user_name }}">
+                </div>
+            </div>
+                <div></div><br>
+                <div class="layui-form-item">
+                    <div class="layui-inline">
+                        <label class="layui-form-label">合作人</label>
+                        <div class="layui-input-inline" style="width: 114px;">
+                            <input type="text" name="assistant1"  autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 114px;">
+                            <input type="text" name="assistant2"  autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 114px;">
+                            <input type="text" name="assistant3"  autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid">-</div>
+                        <div class="layui-input-inline" style="width: 114px;">
+                            <input type="text" name="assistant4"  autocomplete="off" class="layui-input">
+                        </div>
+                        <div class="layui-form-mid layui-word-aux">填写和你一起负责此项目的工程师名字，他将会看到此售后单，如没有则不填。</div>
+                    </div>
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>服务区域</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="area" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <!--                 <div></div><br> -->
+            <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>销售姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="sellname" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div></div><br>
+            <div class="layui-inline">
+                <label class="layui-form-label"><span class="x-red">*</span>客户姓名</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="customer" lay-verify="required" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">客户电话</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="phone" autocomplete="off" class="layui-input" lay-verify="usernumber1">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">客户单位</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="company" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">客户地址</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="address" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div></div><br>
+            <div class="layui-inline">
+                <label class="layui-form-label">产品名称</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="productname" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">产品型号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="productmodel" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">产品序列号</label>
+                <div class="layui-input-inline">
+                    <input type="text" name="productid" autocomplete="off" class="layui-input">
+                </div>
+            </div>
+            <div class="layui-inline">
+                <label class="layui-form-label">销售时间</label>
+                <div class="layui-input-inline">
+                    <input type="text" class="layui-input" name="salestime" id="start2" placeholder="请输入时间" autocomplete="off">
+                </div>
+            </div>
+            <div></div><br>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">故障现象描述</label>
+                <div class="layui-input-block">
+                    <textarea style="width: 50%" name="faultdescription" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">故障处理记录</label>
+                <div class="layui-input-block">
+                    <textarea style="width: 50%" name="faultrecord" class="layui-textarea" placeholder=" 1次处理
+ 2次处理
+ 3次处理"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">故障处理结果</label>
+                <div class="layui-input-block">
+                    <textarea style="width: 50%" name="faultresult" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div class="layui-form-item" pane style="width: 50%">
+                <label class="layui-form-label" style="width: 100px">意见</label>
+                <div class="layui-input-block">
+                    <input type="radio" name="opinion" value="满意" title="满意">
+                    <input type="radio" name="opinion" value="尚可" title="尚可">
+                    <input type="radio" name="opinion" value="不满意" title="不满意">
+                </div>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">具体意见</label>
+                <div class="layui-input-block">
+                    <textarea style="width: 50%" name="specificopinion" class="layui-textarea"></textarea>
+                </div>
+            </div>
+            <div></div><br>
+            <button class="layui-btn" lay-submit>立即提交</button>
+            <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+            <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary ">返回</a>
+    </div>
+    </form>
+    </div>
+    <script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start1' //指定元素
+        });
+        laydate.render({
+            elem: '#start2' //指定元素
+        });
+
+    });
+    layui.use('util', function() {
+        var util = layui.util;
+        //执行一个bar实例
+        util.fixbar({
+            bar2: true,
+            css: { right: 100, bottom: 20 },
+            click: function(type) {
+                if (type === 'bar2') {
+                    layer.open({
+                        title: '备注',
+                        // area: '500px',
+                        content: '1、以上调试维护方案均得到客户认可。\
+  <br />2、我方只对于合同承诺的相关产品进行维护服务。<br />3、此单一式两份，客户和本公司各执一份。<br />4、请严格按照模板认真填写,打*为必填项'
+                    });
+                }
+            }
+        });
+    });
+    </script>
+    <script>
+    layui.use(['form'], function() {
+        var form = layui.form;
+        //自定义验证规则
+        form.verify({
+            usernumber1: function(value) {
+                if (!new RegExp("^$|^[-+]?[0-9]*\\.?[0-9]+$").test(value)) {
+                    return '号码只能填写数字';
+                }
+            },
+        });
+    });
+    </script>
+    {% endif %}
+</body>
+
+</html>

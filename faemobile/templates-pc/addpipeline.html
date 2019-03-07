@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>销售pipeline周报添加</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <style>
+        .layui-form-pane .layui-form-label{
+            width: 125px;
+            text-align: left;
+
+        }
+        .layui-form-pane .layui-form-text .layui-form-label{
+            width: 50%;
+        }
+    </style>
+    <!-- 让IE8/9支持媒体查询，从而兼容栅格 -->
+    <!--[if lt IE 9]>
+      <script src="https://cdn.staticfile.org/html5shiv/r29/html5.min.js"></script>
+      <script src="https://cdn.staticfile.org/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+
+<body>
+    {% if request.session.user_department != "整机事业部" and request.session.user_department != "渠道事业部" %}
+    <div class="x-body">
+        <xblock>您目前无权利填写！
+            <br>请返回<a href="/sellinfo/pipeline/" style="color: #009688"> 上一级 </a>或右上角关闭此选项卡。</xblock>
+    </div>
+    {% else %}
+    <div class="x-body">
+        <form class="layui-form layui-form-pane" action="/sellinfo/addpipelinepost/" method="POST">
+            {% csrf_token %}
+            <div class="layui-form-item">
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>更新时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="filltime" id="start1" lay-verify="required" placeholder="请输入时间" autocomplete="off">
+                    </div>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>区域</label>
+                    <div class="layui-input-inline">
+                        <select name="area" lay-verify="required" lay-search>
+                            <option value="">直接选择或搜索选择</option>
+                            <option value="南京">南京</option>
+                            <option value="北京">北京</option>
+                            <option value="深圳">深圳</option>
+                            <option value="武汉">武汉</option>
+                            <option value="成都">成都</option>
+                            <option value="西安">西安</option>
+                        </select>
+                    </div>
+                </div>
+<!--                 <div></div><br> -->
+                <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>跟进销售</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="sellname" lay-verify="required"  autocomplete="off" class="layui-input" value="{{ request.session.user_name }}">
+                    </div>
+                </div>
+                 <div class="layui-inline">
+                    <label class="layui-form-label"><span class="x-red">*</span>客户名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="customer_name" lay-verify="required"  autocomplete="off" class="layui-input" >
+                    </div>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label">客户分类</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="customer_classification" autocomplete="off" class="layui-input" >
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目名称</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="project_name" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">在该项目中的优势</label>
+                    <div class="layui-input-block">
+                        <textarea style="width: 50%" name="advantage"  class="layui-textarea" ></textarea>
+                    </div>
+                </div>
+                <div></div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">项目关键人</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="keyperson" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">关键人职务</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="keypersonduties" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">电话号码</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="phone" autocomplete="off" class="layui-input" lay-verify="usernumber1">
+                    </div>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label">首次接触时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="firsttime" id="start2"  placeholder="请输入时间" autocomplete="off">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">需求产品型号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="demandtype" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div></div><br>
+                <div class="layui-inline">
+                    <label class="layui-form-label">需求数量</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="demandnumber" min="0.000" step="0.001"  autocomplete="off" class="layui-input" placeholder=" 单位为 K" lay-verify="usernumber">
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">竞品型号</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="competitor" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">竞品优势</label>
+                    <div class="layui-input-block">
+                        <textarea style="width: 50%" name="competitoradvantage"  class="layui-textarea" ></textarea>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">预计下单时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="expected" autocomplete="off" class="layui-input">
+                    </div>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">本周跟进内容</label>
+                    <div class="layui-input-block">
+                        <textarea style="width: 50%" name="process"  class="layui-textarea" placeholder=" 每周提交当周和客户沟通的内容及跟进进展"></textarea>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">赢单率</label>
+                    <div class="layui-input-inline">
+                        <input type="text" name="winrate" autocomplete="off" class="layui-input" lay-verify="usernumber2">
+                    </div>
+                    <div class="layui-form-mid layui-word-aux">%</div>
+                </div>
+                <div></div><br>
+                <div class="layui-form-item layui-form-text">
+                    <label class="layui-form-label">下一步跟进计划及需要支持</label>
+                    <div class="layui-input-block">
+                        <textarea style="width: 50%" name="planprocess"  class="layui-textarea" placeholder=" 本周跟进后下一步的跟进内容,方式。是否需要安排测试,是否安排拜访,是否需要PM,BDM或厂商的进一步拜访以及需要公司如何支持等"></textarea>
+                    </div>
+                </div>
+                <div class="layui-inline">
+                    <label class="layui-form-label">计划行动时间</label>
+                    <div class="layui-input-inline">
+                        <input type="text" class="layui-input" name="plantime" id="start3"  placeholder="请输入时间" autocomplete="off">
+                    </div>
+                </div>
+                <div></div><br>
+                <button class="layui-btn" lay-submit>立即提交</button>
+                <button type="reset" class="layui-btn layui-btn-primary">重置</button>
+                <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary ">返回</a>
+            </div>
+        </form>
+    </div>
+    <script>
+    layui.use('laydate', function() {
+        var laydate = layui.laydate;
+        //执行一个laydate实例
+        laydate.render({
+            elem: '#start1' //指定元素
+        });
+        laydate.render({
+            elem: '#start2' //指定元素
+        });
+        laydate.render({
+            elem: '#start3' //指定元素
+        });
+
+    });
+    layui.use('util', function(){
+  var util = layui.util;  
+  //执行一个bar实例
+  util.fixbar({
+    bar2: true
+    ,css: {right: 100, bottom: 20}
+    ,click: function(type){
+      if(type === 'bar2'){
+        layer.open({
+  title: '填写说明'
+  ,area: '500px'
+  ,content: '1.客户分类：行业,系统集成商,零售分销商,生产型厂商……<br />2.项目名称：产品的具体应用方向。如广告机,Pos机,排队机，触控查询机,一体机，网络安全,教育系统,媒体播放机……\
+  <br />3.需求数量：单位为K,时间范围为本季度。如客户需求为1.5K,则表中填写1.5<br />4.预计下单时间：和客户沟通出比较准确的下单时间或时间段,动态更新<br />5.请严格按照模板认真填写,打*为必填项,提交时间为每周五'
+});
+      }
+    }
+  });
+});
+    </script>
+     <script>
+    layui.use(['form'], function() {
+        var form = layui.form;
+        //自定义验证规则
+        form.verify({
+            usernumber: function(value) {
+                if (!new RegExp("^$|^[-+]?[0-9]*\\.?[0-9]+$").test(value)) {
+                    return '数量只能填写数字';
+                }
+            },
+            usernumber1: function(value) {
+                if (!new RegExp("^$|^[-+]?[0-9]*\\.?[0-9]+$").test(value)) {
+                    return '号码只能填写数字';
+                }
+            },
+            usernumber2: function(value) {
+                if (!new RegExp("^$|^[-+]?[0-9]*\\.?[0-9]+$").test(value)) {
+                    return '赢单率只能填写数字';
+                }
+            },
+        });
+    });
+    </script>
+    {% endif %}
+</body>
+
+</html>

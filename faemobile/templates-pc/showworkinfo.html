@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>日常详情查看</title>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+    <style>
+    .layui-form-pane .layui-form-label {
+        width: 125px;
+        text-align: left;
+
+    }
+
+    .layui-form-pane .layui-form-text .layui-form-label {
+        width: 50%;
+    }
+    </style>
+</head>
+<body>
+    {% for form in form_detailone %}
+    <div class="x-body">
+        <div class="layui-form layui-form-pane">
+            <div class="layui-inline">
+                <label class="layui-form-label">姓名</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.fae_name }}</label>
+            </div>
+            &nbsp;&nbsp;
+            <div class="layui-inline">
+                <label class="layui-form-label">区域</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.area }}</label>
+            </div>
+            <div></div><br>
+            <div class="layui-form-item">
+                <label class="layui-form-label">姓名</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.sellname }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">需求部门</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.demand }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户名称</label>
+                <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.customer_name }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">事物分类</label>
+                <label class="layui-form-label" style="min-width: 125px ;width:auto;background-color: #fff">{{ form.customer_classification }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">发起时间</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.start_date }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">预计用时</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.estimated_time }}分钟</label>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">过程描述</label>
+                <label class="layui-textarea" style="width: 50%">
+                    {{ form.process|linebreaksbr}}
+                </label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">结束时间</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.end_date }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">用时估算</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.estimate }}分钟</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">是否有问题</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.is_question }}</label>
+            </div>
+            <div class="layui-form-item layui-form-text">
+                <label class="layui-form-label">问题描述</label>
+                <label class="layui-textarea" style="width: 50%">
+                    {{ form.question_describe|linebreaksbr}}
+                </label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">满意度评分</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.satisfaction_score| default_if_none:"" }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">评价</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.satisfaction }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">完成时间</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.transaction_time| default_if_none:"" }}</label>
+            </div>
+            <div class="layui-form-item">
+                <label class="layui-form-label">客户满意度</label>
+                <label class="layui-form-label" style="background-color:#fff ">{{ form.customer_satisfaction }}</label>
+            </div>
+            <div>
+            <a href="javascript:history.go(-1)" class="layui-btn layui-btn-primary ">返回</a>
+            </div>
+        </div>
+    </div>
+    <script>
+        layui.use('util', function() {
+        var util = layui.util;
+
+        //执行
+        util.fixbar({
+            css: { right: 100, bottom: 20 }
+        });
+    });
+    </script>
+    {% endfor %}
+</body>
+</html>

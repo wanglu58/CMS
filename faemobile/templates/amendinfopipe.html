@@ -1,0 +1,336 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>安擎工作管理系统(手机版)</title>
+    <meta name="viewport" content="initial-scale=1, maximum-scale=1">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <link rel="stylesheet" href="/./static/css/sm.css">
+    <link rel="stylesheet" href="/./static/css/sm-extend.css">
+    <link rel="stylesheet" href="/./static/css/index.css">
+    <style>
+        .list-block .item-inner:after {
+  position: absolute;
+  top: auto;
+  right: auto;
+  bottom: 0;
+  left: 0;
+  z-index: 15;
+  display: block;
+  width: 100%;
+  height: 1px;
+  content: '';
+  background-color: #e7e7e7;
+  -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+}
+.card-content-inner:after{
+    position: absolute;
+    top: auto;
+    right: auto;
+    bottom: 0;
+    left: 0;
+    z-index: 15;
+    display: block;
+    width: 100%;
+    height: 1px;
+    content: '';
+    background-color: #e7e7e7;
+    -webkit-transform-origin: 50% 100%;
+      -ms-transform-origin: 50% 100%;
+       -o-transform-origin: 50% 100%;
+          transform-origin: 50% 100%;
+        }
+        .toptab{
+            height: 1.9rem;
+        }
+        
+        .buttons-tab{
+            position: fixed;
+            width: 100%;
+            z-index: 999;
+        }
+    </style>
+    <!--     <link rel="stylesheet" href="/./static/css/font.css"> -->
+    <!--     <link rel="stylesheet" href="/./static/css/xadmin.css"> -->
+    <!--     <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script type="text/javascript" src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script> -->
+</head>
+
+<body>
+    <!-- main page -->
+    <div class="page page-current" id="page-index">
+        <header class="bar bar-nav">
+            <a class="icon icon-menu button button-link pull-left open-panel"></a>
+            <a class="button button-link button-nav pull-right open-popup" data-popup=".popup-about">
+            <span class="icon icon-me"></span>
+            </a>
+            <h1 class="title">安擎工作管理系统(手机版)</h1>
+        </header>
+        <div class="content native-scroll" id="page-index">
+            <div id="content-operation" class="row">
+                <div class="col-100">
+                    <div class="toptab">
+                    <div class="buttons-tab">
+                        <a href="#tab1" class="tab-link active button">Sale行业修改</a>
+                        <!--                         <a href="#tab2" class="tab-link button">搜索</a> -->
+                    </div>
+                    </div>
+                    <div class="content-block">
+                        <div class="tabs">
+                            <div id="tab1" class="tab active">
+                                {% for form in form_detailone %}
+                                <form action="/sellinfo/updateinfopipe/" method="POST">
+                                    {% csrf_token %}
+                                    <div class="list-block">
+                                        <ul>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">*更新时间</div>
+                                                        <div class="item-input">
+                                                            <input type="date" name="filltime" autocomplete="off" placeholder="请输入时间" required="required" value="{{ form.filltime|date:'Y-m-d' }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">*区域</div>
+                                                        <select name="area" required="required" id="numbers">
+                                                            <option value="">请选择</option>
+                                                            <option value="南京">南京</option>
+                                                            <option value="北京">北京</option>
+                                                            <option value="深圳">深圳</option>
+                                                            <option value="武汉">武汉</option>
+                                                            <option value="成都">成都</option>
+                                                            <option value="西安">西安</option>
+                                                        </select>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">*跟进销售</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="sellname" autocomplete="off" value="{{ request.session.user_name }}" required="required">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">*客户名称</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="customer_name" autocomplete="off" required="required" value="{{ form.customer_name }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;客户分类</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="customer_classification" autocomplete="off" value="{{ form.customer_classification }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;项目名称</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="project_name" autocomplete="off" value="{{ form.project_name }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;该项目中优势</div>
+                                                        <div class="item-input">
+                                                            <textarea name="advantage">{{ form.advantage }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;项目关键人</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="keyperson" autocomplete="off" value="{{ form.keyperson }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;关键人职务</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="keypersonduties" autocomplete="off" value="{{ form.keypersonduties }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;电话号码</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="phone" autocomplete="off" placeholder="只能填数字" value="{{ form.phone }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;首次接触时间</div>
+                                                        <div class="item-input">
+                                                            <input type="date" name="firsttime" autocomplete="off" placeholder="请输入时间" value="{{ form.firsttime|date:'Y-m-d' }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;需求产品型号</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="demandtype" autocomplete="off" value="{{ form.demandtype }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;需求数量</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="demandnumber" autocomplete="off" placeholder="只能填数字 单位为 K" value="{{ form.demandnumber| default_if_none:'' }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;竞品型号</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="competitor" autocomplete="off" value="{{ form.competitor }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="align-top">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;竞品优势</div>
+                                                        <div class="item-input">
+                                                            <textarea name="competitoradvantage">{{ form.competitoradvantage }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;预计下单时间</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="expected" autocomplete="off" value="{{ form.expected }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="align-top">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;本周跟进内容</div>
+                                                        <div class="item-input">
+                                                            <textarea name="process" placeholder="每周提交当周和客户沟通的内容及跟进进展">{{ form.process }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;赢单率</div>
+                                                        <div class="item-input">
+                                                            <input type="text" name="winrate" autocomplete="off" placeholder="只能填数字 单位为 %" value="{%  widthratio form.winrate 1 100 %}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li class="align-top">
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;下一步跟进<br>计划及需要支持</div>
+                                                        <div class="item-input">
+                                                            <textarea name="planprocess" placeholder="本周跟进后下一步的跟进内容,方式。是否需要安排测试,是否安排拜访,是否需要PM,BDM或厂商的进一步拜访以及需要公司如何支持等">{{ form.planprocess }}</textarea>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <li>
+                                                <div class="item-content">
+                                                    <div class="item-inner">
+                                                        <div class="item-title label">&nbsp;计划行动时间</div>
+                                                        <div class="item-input">
+                                                            <input type="date" name="plantime" autocomplete="off" placeholder="请输入时间" value="{{ form.plantime|date:'Y-m-d' }}">
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </li>
+                                            <div class="card-content-inner" style="text-align: left;"><a href="javascript:history.go(-1)"external>返回上一页</a></div>
+                                        </ul>
+                                    </div>
+                                    <div class="content-block">
+                                        <div class="row">
+                                            <div class="col-50" align="center"><button type="submit" class="button button-big button-fill button-success">立即提交</button></div>
+                                            <div class="col-50" align="center"><button type="reset" class="button button-big button-fill button-warning" ">重置</a></div>
+                                            </div>
+                                        </div>
+                                </form>
+                                
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'userpublic.html' %}
+                                            <script type='text/javascript' src='/./static/js/zepto.js' charset='utf-8'></script>
+                                            <script type='text/javascript' src='/./static/js/sm.js' charset='utf-8'></script>
+                                            <script type='text/javascript' src='/./static/js/sm-extend.js' charset='utf-8'></script>
+                                            <script type="text/javascript" src="/./static/js/index.js"></script>
+                                            <script>
+                                            function selectNumber(city) {
+                                                var numbers = $("#numbers").find('option');
+                                                for (var j = 1; j < numbers.length; j++) {
+                                                    if ($(numbers[j]).val() == city) {
+                                                        $(numbers[j]).attr('selected', 'selected');
+                                                    }
+                                                }
+                                            }
+                                            selectNumber('{{ form.area }}');
+                                            </script>
+                                            {% endfor %}
+</body>
+
+</html>

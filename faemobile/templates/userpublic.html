@@ -1,0 +1,119 @@
+<div class="popup popup-about">
+    <header class="bar bar-nav">
+        <a class="button button-link button-nav pull-right close-popup">
+                关闭 </a>
+        <h1 class="title">用户中心</h1>
+    </header>
+    <div class="content">
+        <div class="content-inner">
+            <div class="content-block">
+                {% if not request.session.user_name %}
+                <p style="text-align: center;">欢迎您，游客！</p>
+                <p style="height: 1.7rem"></p>
+                <p>
+                    <a class="button" href="/userinfo/login"external>登陆</a>
+                </p>
+                {% else %}
+                <p style="text-align: center;">欢迎您，{{ request.session.user_department }}-{{ request.session.user_name }}！</p>
+                <p style="height: 1.7rem"></p>
+                <p>
+<!--                     <a class="button" href="/userinfo/login"external>更改用户</a><br> -->
+                    <a class="button" href="/userinfo/logout"external>注销</a>
+                </p>
+                {% endif %}
+            </div>
+        </div>
+    </div>
+</div>
+<div class="panel-overlay"></div>
+<div id="slidermenu" class="panel panel-left panel-reveal">
+    <div class="list-block">
+        <ul id="accordion" class="accordion">
+            {% if request.session.user_department == '科技制造部' %}
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>售后工作管理</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/serviceinfo/service"external>售后服务管理</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>添加新的数据</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/serviceinfo/addservice"external>售后服务添加</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>修改已有数据</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/serviceinfo/amendservice"external>售后服务修改</a></li>
+                </ul>
+            </li>
+            {% endif %}
+            {% if request.session.user_department == '技术部' %}
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>FAE工作管理</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/forminfo/plan"external>FAE方案管理</a></li>
+                    <li><a href="/forminfo/event"external>FAE事件管理</a></li>
+                    <li><a href="/forminfo/work"external>FAE日常管理</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>添加新的数据</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/forminfo/addform-plan"external>FAE方案添加</a></li>
+                    <li><a href="/forminfo/addform-event"external>FAE事件添加</a></li>
+                    <li><a href="/forminfo/addform-work"external>FAE日常添加</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>修改已有数据</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/forminfo/amend-plan"external>FAE方案修改</a></li>
+                    <li><a href="/forminfo/amend-event"external>FAE事件修改</a></li>
+                    <li><a href="/forminfo/amend-work"external>FAE日常修改</a></li>
+                </ul>
+            </li>
+            {% endif %}
+            {% if request.session.user_department == '整机事业部' or request.session.user_department == '渠道事业部' %}
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>Sale工作管理</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/sellinfo/sellweek"external>Sale周报</a></li>
+                    <li><a href="/sellinfo/pipeline"external>Sale行业</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>Sale工作添加</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/sellinfo/addsellweek"external>Sale周报添加</a></li>
+                    <li><a href="/sellinfo/addpipeline"external>Sale行业添加</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>Sale工作修改</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/sellinfo/amendsellweek"external>Sale周报修改</a></li>
+                    <li><a href="/sellinfo/amendpipeline"external>Sale行业修改</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>技术支持查看</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/forminfo/plan"external>技术支持方案管理</a></li>
+                    <li><a href="/forminfo/event"external>技术支持事件管理</a></li>
+                    <li><a href="/forminfo/work"external>技术支持日常管理</a></li>
+                </ul>
+            </li>
+            <li class="dropdown">
+                <div class="menu" data-toggle="dropdown"><i class="icon icon-app"></i> <span>技术支持评价</span><i class="icon icon-right pull-right"></i></div>
+                <ul class="dropdown-menu">
+                    <li><a href="/forminfo/planrevise"external>技术支持方案评价</a></li>
+                    <li><a href="/forminfo/eventrevise"external>技术支持事件评价</a></li>
+                    <li><a href="/forminfo/workrevise"external>技术支持日常评价</a></li>
+                </ul>
+            </li>
+        </ul>
+    </div>
+</div>
+{% endif %}

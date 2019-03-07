@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta charset="UTF-8">
+    <title>欢迎</title>
+    <meta name="renderer" content="webkit|ie-comp|ie-stand">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta http-equiv="Cache-Control" content="no-siteapp" />
+    <link rel="stylesheet" href="/./static/css/font.css">
+    <link rel="stylesheet" href="/./static/css/xadmin.css">
+    <link rel="shortcut icon" href="/./static/images/favicon.ico"/>
+    <script type="text/javascript" src="/./static/js/jquery-3.2.1.min.js"></script>
+    <script src="/./static/lib/layui/layui.js" charset="utf-8"></script>
+    <script type="text/javascript" src="/./static/js/xadmin.js"></script>
+</head>
+
+<body>
+   
+
+    <div class="x-body layui-anim layui-anim-up">
+        <blockquote class="layui-elem-quote" style="cursor: default;">欢迎安擎员工 当前时间：<span id="monitor"></span></blockquote>
+        <fieldset class="layui-elem-field">
+            <legend style="cursor: default;">统计信息一览</legend>
+            <div class="layui-field-box">
+                <table class="layui-table" lay-size="sm">
+
+    <span class="layui-breadcrumb" lay-separator="|">
+  <a href="/welcome">&nbsp;&nbsp;&nbsp;上周</a>
+  <a href="/welcome_1">本月</a>
+  <a><cite style="cursor: default;">上月</cite></a>
+    </span>
+
+  <thead>
+    <tr>
+      <th>姓名</th>
+      <th>方案数目</th>
+      <th>事件数目</th>
+      <th>日常数目</th>
+      <th>销售方案评价数目</th>
+      <th>销售事件评价数目</th>
+      <th>销售日常评价数目</th>
+      <th>方案满意度平均分</th>
+      <th>事件满意度平均分</th>
+      <th>日常满意度平均分</th>
+      <th>方案问题数目</th>
+      <th>事件问题数目</th>
+      <th>日常问题数目</th>
+    </tr> 
+  </thead>
+  <tbody>
+    <tr>
+      <td>胡箴</td>
+      <td align="center">{% for list in plan_month %}{% if list.username == '胡箴' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in event_month %}{% if list.username == '胡箴' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in work_month %}{% if list.username == '胡箴' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month %}{% if list.username == '胡箴' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month %}{% if list.username == '胡箴' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month %}{% if list.username == '胡箴' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '胡箴' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_score %}{% if list.username == '胡箴' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_score %}{% if list.username == '胡箴' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
+    </tr>
+    <tr>
+      <td>王远辉</td>
+      <td align="center">{% for list in plan_month %}{% if list.username == '王远辉' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in event_month %}{% if list.username == '王远辉' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in work_month %}{% if list.username == '王远辉' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month %}{% if list.username == '王远辉' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month %}{% if list.username == '王远辉' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month %}{% if list.username == '王远辉' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '王远辉' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_score %}{% if list.username == '王远辉' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_score %}{% if list.username == '王远辉' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
+    </tr>
+    <tr>
+      <td>王运</td>
+      <td align="center">{% for list in plan_month %}{% if list.username == '王运' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in event_month %}{% if list.username == '王运' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in work_month %}{% if list.username == '王运' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month %}{% if list.username == '王运' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month %}{% if list.username == '王运' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month %}{% if list.username == '王运' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '王运' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_score %}{% if list.username == '王运' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_score %}{% if list.username == '王运' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '王运' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_q %}{% if list.username == '王运' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_q %}{% if list.username == '王运' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
+    </tr>
+    <tr>
+      <td>王路</td>
+      <td align="center">{% for list in plan_month %}{% if list.username == '王路' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in event_month %}{% if list.username == '王路' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in work_month %}{% if list.username == '王路' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month %}{% if list.username == '王路' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month %}{% if list.username == '王路' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month %}{% if list.username == '王路' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '王路' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_score %}{% if list.username == '王路' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_score %}{% if list.username == '王路' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '王路' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_q %}{% if list.username == '王路' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_q %}{% if list.username == '王路' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
+    </tr>
+    <tr>
+      <td>王玲玲</td>
+      <td align="center">{% for list in plan_month %}{% if list.username == '王玲玲' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in event_month %}{% if list.username == '王玲玲' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in work_month %}{% if list.username == '王玲玲' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month %}{% if list.username == '王玲玲' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month %}{% if list.username == '王玲玲' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month %}{% if list.username == '王玲玲' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '王玲玲' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_score %}{% if list.username == '王玲玲' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_score %}{% if list.username == '王玲玲' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
+    </tr>
+    <tr>
+      <td>张彪</td>
+      <td align="center">{% for list in plan_month %}{% if list.username == '张彪' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in event_month %}{% if list.username == '张彪' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in work_month %}{% if list.username == '张彪' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month %}{% if list.username == '张彪' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month %}{% if list.username == '张彪' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month %}{% if list.username == '张彪' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '张彪' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_score %}{% if list.username == '张彪' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_score %}{% if list.username == '张彪' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '张彪' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_q %}{% if list.username == '张彪' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_q %}{% if list.username == '张彪' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
+    </tr>
+    <tr>
+      <td>孙宇帆</td>
+      <td align="center">{% for list in plan_month %}{% if list.username == '孙宇帆' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in event_month %}{% if list.username == '孙宇帆' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in work_month %}{% if list.username == '孙宇帆' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month %}{% if list.username == '孙宇帆' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month %}{% if list.username == '孙宇帆' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month %}{% if list.username == '孙宇帆' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '孙宇帆' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_score %}{% if list.username == '孙宇帆' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_score %}{% if list.username == '孙宇帆' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
+    </tr>
+    <tr>
+      <td> 姜天祥</td>
+      <td align="center">{% for list in plan_month %}{% if list.username == '蒋天祥' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in event_month %}{% if list.username == '蒋天祥' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in work_month %}{% if list.username == '蒋天祥' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month %}{% if list.username == '蒋天祥' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month %}{% if list.username == '蒋天祥' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month %}{% if list.username == '蒋天祥' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '蒋天祥' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_score %}{% if list.username == '蒋天祥' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_score %}{% if list.username == '蒋天祥' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '蒋天祥' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_event_month_q %}{% if list.username == '蒋天祥' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
+      <td align="center">{% for list in sale_work_month_q %}{% if list.username == '蒋天祥' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
+    </tr>
+  </tbody>
+</table>
+            </div>
+        </fieldset>
+    </div>
+    <script>
+    var monitor = document.getElementById('monitor');
+
+    setInterval(function() {
+
+        var now = new Date();
+        monitor.innerHTML = now.getHours() + ':' + now.getMinutes() + ':' + now.getSeconds();
+
+    }, 500);
+    </script>
+    <script>
+    function complete() {
+        layer.open({
+            title: '通知',
+            content: '文档待更新，请耐心等待！'
+        });
+    }
+    function complete1() {
+        layer.open({
+            title: '注意事项',
+            content: '技术部导入注意:<br />1.Excel版本必须是xls的兼容版本<br />2.方案事件日常三张表\
+            一一对应不要上传错<br />3.三张表的格式必须与导出的格式完全一致<br />4.三张表表头和单元格不能少填或填错<br />5.不要在Excel中添加其他无关文字或无关项<br />\
+            否则造成的一切后果自己承担！<br />所有部门填表格注意:<br />1.必须根据给出的要求格式填写,否则会报错<br />2.打*的是必填项,否则会无法提交'
+        });
+    }
+    function update(){
+        layer.open({
+            title: '主要更新说明',
+            content: '1.所有表格增加查看和返回功能<br />2.增加销售和售后两大模块<br />3.增加,修改,评价等页面更新,更加美观实用'
+        });
+    }
+    </script>
+</body>
+
+</html>
