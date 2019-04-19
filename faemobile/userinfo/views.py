@@ -200,38 +200,31 @@ def loginin(request):
             if not find_user:
                 return render(request, 'login.html', {'message':'用户名不存在'})
             if find_user[0].isactive == 0:
-                if request.session.get('user_errortime'):
-                    # print(request.session.get('user_errortime'))
-                    if time.time() - request.session.get('user_errortime') >= 300:
-                        find_user[0].isactive = 1
-                        find_user[0].error_number = 0
-                        find_user[0].save()
-                        return render(request,'login.html', {'message':'锁定已解除，请重新登录'})
-                    else:
-                        return render(request,'login.html', {'message':'该账号已被锁定，请5分钟后重试'})
-                return render(request, 'login.html', {'message': '账户还未激活，请联系管理员'})
+                return render(request, 'login.html', {'message': '账户未激活，请联系管理员'})
             if find_user[0].error_number >= 5:
-                find_user[0].isactive = 0
-                request.session['user_errortime'] = time.time()
-                find_user[0].save()
+                endtime = datetime.datetime.now()
+                starttime = find_user[0].updated_time
+                if (endtime - starttime).seconds > 300 :
+                    find_user[0].error_number = 0
+                    find_user[0].save()
+                    return render(request, 'login.html', {'message': '锁定已解除，请重新登录'})
                 return  render(request,'login.html', {'message':"输错次数过多，账号已被锁定，请5分钟后重试"})
             if len(find_user) <= 0:
                 return render(request,'login.html', {'message':'用户未注册'})
             if not check_password(user.password,find_user[0].userpassword):
                 find_user[0].error_number += 1
-                # print(find_user[0].error_number)
+                find_user[0].updated_time = datetime.datetime.now()
                 find_user[0].save()
                 return render(request,'login.html',{'message':'用户名或密码错误'})
         except ObjectDoesNotExist as e:
             logging.warning(e)
-        # if find_user[0].isdelete:
-        #     return render(request,'login.html',{'message':'用户不存在'})
         request.session['user_id'] = find_user[0].id
         request.session['user_name'] = find_user[0].username
         request.session['user_department'] = find_user[0].department
         find_user[0].error_number = 0
+        find_user[0].updated_time = datetime.datetime.now()
         find_user[0].save()
-        return render(request,'index.html')
+        return render(request,'index.html',{'message':'登录成功'})
     return render(request,'index.html')
 
 def registerin(request):

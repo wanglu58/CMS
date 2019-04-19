@@ -51,128 +51,160 @@
   <tbody>
     <tr>
       <td>胡箴</td>
+      {% if request.session.user_name == "胡箴" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportplan/?name=9&times=thismonth" style="color: #009688">{% for list in plan_month %}{% if list.username == '胡箴' %}{{ list.num_plan }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in plan_month %}{% if list.username == '胡箴' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_plan_month %}{% if list.username == '胡箴' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '胡箴' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "胡箴" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=9/" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=9" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "胡箴" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplancomment/?name=9/" style="color: #009688">{% for list in plan_comment %}{% if list.username == '胡箴' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplancomment/?name=9" style="color: #009688">{% for list in plan_comment %}{% if list.username == '胡箴' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in plan_comment %}{% if list.username == '胡箴' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王远辉</td>
+      {% if request.session.user_name == "王远辉" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportplan/?name=10&times=thismonth" style="color: #009688">{% for list in plan_month %}{% if list.username == '王远辉' %}{{ list.num_plan }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in plan_month %}{% if list.username == '王远辉' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_plan_month %}{% if list.username == '王远辉' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '王远辉' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王远辉" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=10/" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=10" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王远辉" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplancomment/?name=10/" style="color: #009688">{% for list in plan_comment %}{% if list.username == '王远辉' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplancomment/?name=10" style="color: #009688">{% for list in plan_comment %}{% if list.username == '王远辉' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in plan_comment %}{% if list.username == '王远辉' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王运</td>
+      {% if request.session.user_name == "王运" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportplan/?name=12&times=thismonth" style="color: #009688">{% for list in plan_month %}{% if list.username == '王运' %}{{ list.num_plan }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in plan_month %}{% if list.username == '王运' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_plan_month %}{% if list.username == '王运' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '王运' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王运" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=12/" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '王运' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=12" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '王运' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '王运' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王运" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplancomment/?name=12/" style="color: #009688">{% for list in plan_comment %}{% if list.username == '王运' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplancomment/?name=12" style="color: #009688">{% for list in plan_comment %}{% if list.username == '王运' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in plan_comment %}{% if list.username == '王运' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王路</td>
+      {% if request.session.user_name == "王路" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportplan/?name=8&times=thismonth" style="color: #009688">{% for list in plan_month %}{% if list.username == '王路' %}{{ list.num_plan }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in plan_month %}{% if list.username == '王路' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_plan_month %}{% if list.username == '王路' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '王路' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王路" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=8/" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '王路' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=8" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '王路' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '王路' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王路" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplancomment/?name=8/" style="color: #009688">{% for list in plan_comment %}{% if list.username == '王路' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplancomment/?name=8" style="color: #009688">{% for list in plan_comment %}{% if list.username == '王路' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in plan_comment %}{% if list.username == '王路' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王玲玲</td>
+      {% if request.session.user_name == "王玲玲" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportplan/?name=7&times=thismonth" style="color: #009688">{% for list in plan_month %}{% if list.username == '王玲玲' %}{{ list.num_plan }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in plan_month %}{% if list.username == '王玲玲' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_plan_month %}{% if list.username == '王玲玲' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '王玲玲' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王玲玲" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=7/" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=7" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王玲玲" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplancomment/?name=7/" style="color: #009688">{% for list in plan_comment %}{% if list.username == '王玲玲' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplancomment/?name=7" style="color: #009688">{% for list in plan_comment %}{% if list.username == '王玲玲' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in plan_comment %}{% if list.username == '王玲玲' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>张彪</td>
+      {% if request.session.user_name == "张彪" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportplan/?name=2&times=thismonth" style="color: #009688">{% for list in plan_month %}{% if list.username == '张彪' %}{{ list.num_plan }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in plan_month %}{% if list.username == '张彪' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_plan_month %}{% if list.username == '张彪' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '张彪' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "张彪" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=2/" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '张彪' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=2" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '张彪' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '张彪' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "张彪" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplancomment/?name=2/" style="color: #009688">{% for list in plan_comment %}{% if list.username == '张彪' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplancomment/?name=2" style="color: #009688">{% for list in plan_comment %}{% if list.username == '张彪' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in plan_comment %}{% if list.username == '张彪' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>孙宇帆</td>
+      {% if request.session.user_name == "孙宇帆" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportplan/?name=6&times=thismonth" style="color: #009688">{% for list in plan_month %}{% if list.username == '孙宇帆' %}{{ list.num_plan }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in plan_month %}{% if list.username == '孙宇帆' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_plan_month %}{% if list.username == '孙宇帆' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '孙宇帆' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "孙宇帆" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=6/" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=6" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "孙宇帆" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplancomment/?name=6/" style="color: #009688">{% for list in plan_comment %}{% if list.username == '孙宇帆' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplancomment/?name=6" style="color: #009688">{% for list in plan_comment %}{% if list.username == '孙宇帆' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in plan_comment %}{% if list.username == '孙宇帆' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>姜天祥</td>
+      {% if request.session.user_name == "姜天祥" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportplan/?name=13&times=thismonth" style="color: #009688">{% for list in plan_month %}{% if list.username == '姜天祥' %}{{ list.num_plan }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in plan_month %}{% if list.username == '姜天祥' %}{{ list.num_plan }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_plan_month %}{% if list.username == '姜天祥' %}{{ list.num_saleplan }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_plan_month_score %}{% if list.username == '姜天祥' %}{{ list.score_plan | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "姜天祥" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=13/" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '姜天祥' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplanmonthsquestion/?name=13" style="color: #009688">{% for list in sale_plan_month_q %}{% if list.username == '姜天祥' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_plan_month_q %}{% if list.username == '姜天祥' %}{{ list.num_saleplanq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "姜天祥" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportplancomment/?name=13/" style="color: #009688">{% for list in plan_comment %}{% if list.username == '姜天祥' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportplancomment/?name=13" style="color: #009688">{% for list in plan_comment %}{% if list.username == '姜天祥' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in plan_comment %}{% if list.username == '姜天祥' %}{{ list.num_plancomment }}{% endif %}{% endfor %}</td>
       {% endif %}
@@ -194,128 +226,160 @@
   <tbody>
     <tr>
       <td>胡箴</td>
+      {% if request.session.user_name == "胡箴" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportevent/?name=9&times=thismonth" style="color: #009688">{% for list in event_month %}{% if list.username == '胡箴' %}{{ list.num_event}}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in event_month %}{% if list.username == '胡箴' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_event_month %}{% if list.username == '胡箴' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_event_month_score %}{% if list.username == '胡箴' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "胡箴" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=9/" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=9" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_event_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "胡箴" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventcomment/?name=9/" style="color: #009688">{% for list in event_comment %}{% if list.username == '胡箴' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventcomment/?name=9" style="color: #009688">{% for list in event_comment %}{% if list.username == '胡箴' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in event_comment %}{% if list.username == '胡箴' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王远辉</td>
+      {% if request.session.user_name == "王远辉" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportevent/?name=10&times=thismonth" style="color: #009688">{% for list in event_month %}{% if list.username == '王远辉' %}{{ list.num_event}}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in event_month %}{% if list.username == '王远辉' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_event_month %}{% if list.username == '王远辉' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_event_month_score %}{% if list.username == '王远辉' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王远辉" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=10/" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=10" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_event_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王远辉" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventcomment/?name=10/" style="color: #009688">{% for list in event_comment %}{% if list.username == '王远辉' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventcomment/?name=10" style="color: #009688">{% for list in event_comment %}{% if list.username == '王远辉' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in event_comment %}{% if list.username == '王远辉' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王运</td>
+      {% if request.session.user_name == "王运" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportevent/?name=12&times=thismonth" style="color: #009688">{% for list in event_month %}{% if list.username == '王运' %}{{ list.num_event}}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in event_month %}{% if list.username == '王运' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_event_month %}{% if list.username == '王运' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_event_month_score %}{% if list.username == '王运' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王运" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=12/" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '王运' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=12" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '王运' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_event_month_q %}{% if list.username == '王运' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王运" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventcomment/?name=12/" style="color: #009688">{% for list in event_comment %}{% if list.username == '王运' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventcomment/?name=12" style="color: #009688">{% for list in event_comment %}{% if list.username == '王运' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in event_comment %}{% if list.username == '王运' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王路</td>
+      {% if request.session.user_name == "王路" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportevent/?name=8&times=thismonth" style="color: #009688">{% for list in event_month %}{% if list.username == '王路' %}{{ list.num_event}}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in event_month %}{% if list.username == '王路' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_event_month %}{% if list.username == '王路' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_event_month_score %}{% if list.username == '王路' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王路" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=8/" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '王路' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=8" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '王路' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_event_month_q %}{% if list.username == '王路' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王路" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventcomment/?name=8/" style="color: #009688">{% for list in event_comment %}{% if list.username == '王路' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventcomment/?name=8" style="color: #009688">{% for list in event_comment %}{% if list.username == '王路' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in event_comment %}{% if list.username == '王路' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王玲玲</td>
+      {% if request.session.user_name == "王玲玲" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportevent/?name=7&times=thismonth" style="color: #009688">{% for list in event_month %}{% if list.username == '王玲玲' %}{{ list.num_event}}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in event_month %}{% if list.username == '王玲玲' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_event_month %}{% if list.username == '王玲玲' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_event_month_score %}{% if list.username == '王玲玲' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王玲玲" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=7/" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=7" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_event_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王玲玲" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventcomment/?name=7/" style="color: #009688">{% for list in event_comment %}{% if list.username == '王玲玲' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventcomment/?name=7" style="color: #009688">{% for list in event_comment %}{% if list.username == '王玲玲' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in event_comment %}{% if list.username == '王玲玲' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>张彪</td>
+      {% if request.session.user_name == "张彪" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportevent/?name=2&times=thismonth" style="color: #009688">{% for list in event_month %}{% if list.username == '张彪' %}{{ list.num_event}}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in event_month %}{% if list.username == '张彪' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_event_month %}{% if list.username == '张彪' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_event_month_score %}{% if list.username == '张彪' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "张彪" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=2/" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '张彪' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=2" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '张彪' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_event_month_q %}{% if list.username == '张彪' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "张彪" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventcomment/?name=2/" style="color: #009688">{% for list in event_comment %}{% if list.username == '张彪' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventcomment/?name=2" style="color: #009688">{% for list in event_comment %}{% if list.username == '张彪' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in event_comment %}{% if list.username == '张彪' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>孙宇帆</td>
-      <td align="center">{% for list in event_month %}{% if list.username == '孙宇帆' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      {% if request.session.user_name == "孙宇帆" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportevent/?name=6&times=thismonth" style="color: #009688">{% for list in event_month %}{% if list.username == '孙宇帆' %}{{ list.num_event}}{% endif %}{% endfor %}</a></td>
+      {% else %}
+      <td align="center">{% for list in event_month %}{% if list.username == '张彪' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_event_month %}{% if list.username == '孙宇帆' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_event_month_score %}{% if list.username == '孙宇帆' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "孙宇帆" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=6/" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=6" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_event_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "孙宇帆" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventcomment/?name=6/" style="color: #009688">{% for list in event_comment %}{% if list.username == '孙宇帆' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventcomment/?name=6" style="color: #009688">{% for list in event_comment %}{% if list.username == '孙宇帆' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in event_comment %}{% if list.username == '孙宇帆' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>姜天祥</td>
+      {% if request.session.user_name == "姜天祥" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportevent/?name=13&times=thismonth" style="color: #009688">{% for list in event_month %}{% if list.username == '姜天祥' %}{{ list.num_event}}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in event_month %}{% if list.username == '姜天祥' %}{{ list.num_event}}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_event_month %}{% if list.username == '姜天祥' %}{{ list.num_saleevent }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_event_month_score %}{% if list.username == '姜天祥' %}{{ list.score_event | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "姜天祥" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=13/" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '姜天祥' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventmonthsquestion/?name=13" style="color: #009688">{% for list in sale_event_month_q %}{% if list.username == '姜天祥' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_event_month_q %}{% if list.username == '姜天祥' %}{{ list.num_saleeventq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "姜天祥" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exporteventcomment/?name=13/" style="color: #009688">{% for list in event_comment %}{% if list.username == '姜天祥' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exporteventcomment/?name=13" style="color: #009688">{% for list in event_comment %}{% if list.username == '姜天祥' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in event_comment %}{% if list.username == '姜天祥' %}{{ list.num_eventcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
@@ -336,128 +400,160 @@
   <tbody>
     <tr>
       <td>胡箴</td>
+      {% if request.session.user_name == "胡箴" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportwork/?name=9&times=thismonth" style="color: #009688">{% for list in work_month %}{% if list.username == '胡箴' %}{{ list.num_work }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in work_month %}{% if list.username == '胡箴' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_work_month %}{% if list.username == '胡箴' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_work_month_score %}{% if list.username == '胡箴' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "胡箴" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=9/" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=9" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_work_month_q %}{% if list.username == '胡箴' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "胡箴" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkcomment/?name=9/" style="color: #009688">{% for list in work_comment %}{% if list.username == '胡箴' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkcomment/?name=9" style="color: #009688">{% for list in work_comment %}{% if list.username == '胡箴' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in work_comment %}{% if list.username == '胡箴' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王远辉</td>
+      {% if request.session.user_name == "王远辉" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportwork/?name=10&times=thismonth" style="color: #009688">{% for list in work_month %}{% if list.username == '王远辉' %}{{ list.num_work }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in work_month %}{% if list.username == '王远辉' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_work_month %}{% if list.username == '王远辉' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_work_month_score %}{% if list.username == '王远辉' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王远辉" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=10/" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=10" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_work_month_q %}{% if list.username == '王远辉' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王远辉" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkcomment/?name=10/" style="color: #009688">{% for list in work_comment %}{% if list.username == '王远辉' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkcomment/?name=10" style="color: #009688">{% for list in work_comment %}{% if list.username == '王远辉' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in work_comment %}{% if list.username == '王远辉' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王运</td>
+      {% if request.session.user_name == "王运" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportwork/?name=12&times=thismonth" style="color: #009688">{% for list in work_month %}{% if list.username == '王运' %}{{ list.num_work }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in work_month %}{% if list.username == '王运' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_work_month %}{% if list.username == '王运' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_work_month_score %}{% if list.username == '王运' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王运" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=12/" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '王运' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=12" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '王运' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_work_month_q %}{% if list.username == '王运' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王运" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkcomment/?name=12/" style="color: #009688">{% for list in work_comment %}{% if list.username == '王运' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkcomment/?name=12" style="color: #009688">{% for list in work_comment %}{% if list.username == '王运' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in work_comment %}{% if list.username == '王运' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王路</td>
+      {% if request.session.user_name == "王路" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportwork/?name=8&times=thismonth" style="color: #009688">{% for list in work_month %}{% if list.username == '王路' %}{{ list.num_work }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in work_month %}{% if list.username == '王路' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_work_month %}{% if list.username == '王路' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_work_month_score %}{% if list.username == '王路' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王路" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=8/" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '王路' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=8" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '王路' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_work_month_q %}{% if list.username == '王路' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王路" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkcomment/?name=8/" style="color: #009688">{% for list in work_comment %}{% if list.username == '王路' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkcomment/?name=8" style="color: #009688">{% for list in work_comment %}{% if list.username == '王路' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in work_comment %}{% if list.username == '王路' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>王玲玲</td>
+      {% if request.session.user_name == "王玲玲" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportwork/?name=7&times=thismonth" style="color: #009688">{% for list in work_month %}{% if list.username == '王玲玲' %}{{ list.num_work }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in work_month %}{% if list.username == '王玲玲' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_work_month %}{% if list.username == '王玲玲' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_work_month_score %}{% if list.username == '王玲玲' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "王玲玲" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=7/" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=7" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_work_month_q %}{% if list.username == '王玲玲' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "王玲玲" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkcomment/?name=7/" style="color: #009688">{% for list in work_comment %}{% if list.username == '王玲玲' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkcomment/?name=7" style="color: #009688">{% for list in work_comment %}{% if list.username == '王玲玲' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in work_comment %}{% if list.username == '王玲玲' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>张彪</td>
+      {% if request.session.user_name == "张彪" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportwork/?name=2&times=thismonth" style="color: #009688">{% for list in work_month %}{% if list.username == '张彪' %}{{ list.num_work }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in work_month %}{% if list.username == '张彪' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_work_month %}{% if list.username == '张彪' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_work_month_score %}{% if list.username == '张彪' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "张彪" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=2/" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '张彪' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=2" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '张彪' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_work_month_q %}{% if list.username == '张彪' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "张彪" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkcomment/?name=2/" style="color: #009688">{% for list in work_comment %}{% if list.username == '张彪' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkcomment/?name=2" style="color: #009688">{% for list in work_comment %}{% if list.username == '张彪' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in work_comment %}{% if list.username == '张彪' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>孙宇帆</td>
+      {% if request.session.user_name == "孙宇帆" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportwork/?name=6&times=thismonth" style="color: #009688">{% for list in work_month %}{% if list.username == '孙宇帆' %}{{ list.num_work }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in work_month %}{% if list.username == '孙宇帆' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_work_month %}{% if list.username == '孙宇帆' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_work_month_score %}{% if list.username == '孙宇帆' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "孙宇帆" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=6/" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=6" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_work_month_q %}{% if list.username == '孙宇帆' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "孙宇帆" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkcomment/?name=6/" style="color: #009688">{% for list in work_comment %}{% if list.username == '孙宇帆' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkcomment/?name=6" style="color: #009688">{% for list in work_comment %}{% if list.username == '孙宇帆' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in work_comment %}{% if list.username == '孙宇帆' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
     </tr>
     <tr>
       <td>姜天祥</td>
+      {% if request.session.user_name == "姜天祥" or request.session.user_name == '陈武' %}
+      <td align="center"><a href="/forminfo/exportwork/?name=13&times=thismonth" style="color: #009688">{% for list in work_month %}{% if list.username == '姜天祥' %}{{ list.num_work }}{% endif %}{% endfor %}</a></td>
+      {% else %}
       <td align="center">{% for list in work_month %}{% if list.username == '姜天祥' %}{{ list.num_work }}{% endif %}{% endfor %}</td>
+      {% endif %}
       <td align="center">{% for list in sale_work_month %}{% if list.username == '姜天祥' %}{{ list.num_salework }}{% endif %}{% endfor %}</td>
       <td align="center">{% for list in sale_work_month_score %}{% if list.username == '姜天祥' %}{{ list.score_work | default_if_none:"" | floatformat }}{% endif %}{% endfor %}</td>
       {% if request.session.user_name == "姜天祥" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=13/" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '姜天祥' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkmonthsquestion/?name=13" style="color: #009688">{% for list in sale_work_month_q %}{% if list.username == '姜天祥' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in sale_work_month_q %}{% if list.username == '姜天祥' %}{{ list.num_saleworkq }}{% endif %}{% endfor %}</td>
       {% endif %}
       {% if request.session.user_name == "姜天祥" or request.session.user_name == '陈武' %}
-      <td align="center"><a href="/forminfo/exportworkcomment/?name=13/" style="color: #009688">{% for list in work_comment %}{% if list.username == '姜天祥' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
+      <td align="center"><a href="/forminfo/exportworkcomment/?name=13" style="color: #009688">{% for list in work_comment %}{% if list.username == '姜天祥' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</a></td>
       {% else %}
       <td align="center">{% for list in work_comment %}{% if list.username == '姜天祥' %}{{ list.num_workcomment }}{% endif %}{% endfor %}</td>
       {% endif %}
@@ -500,7 +596,7 @@
         layer.open({
             area: '400px',
             title: '更新说明以及注意事项',
-            content: '更新说明：<br />1.技术部表单显示页面优化<br />2.一键导出功能增加,可以导出上月或本月数据并自动命名<br />3.统计信息一览中问题和评论数目支持跳转查看<br />注意事项:<br />1.填表格必须根据给出的要求格式填写,适当回车排版<br />2.填写时打*的是必填项,否则会无法提交'
+            content: '更新说明：<br />1.技术部更新手机版界面,可以直接用手机访问<br />2.导出导入优化,可以同时导出导入三张表并自动命名<br />注意事项:<br />1.填表格必须根据给出的要求格式填写,适当回车排版<br />2.填写时打*的是必填项,否则会无法提交'
         });
     }
     </script>

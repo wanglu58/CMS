@@ -61,7 +61,7 @@
         </xblock>
         <div><div class="layui-btn layui-btn-normal layui-btn-sm layui-btn-radius">
             事件管理
-        </div><a href="javascript:history.go(-1)" style="float: right;color: #009688;line-height: 39px;font-size: 13.2px">* 返回&nbsp;&nbsp;</a></div>
+        </div><a href="/welcome" style="float: right;color: #009688;line-height: 39px;font-size: 13.2px">* 返回首页&nbsp;&nbsp;</a></div>
         <table class="layui-table" lay-size="sm">
             <thead>
                 <th>姓名</th>
@@ -140,11 +140,11 @@
                 <a class="num" href="?page={{ pg }}">{{ pg }}</a> {% endif %} {% endfor %} {% if Forminfoevent.has_next %}
                 <a class="next" href="?page={{ Forminfoevent.next_page_number }}">&gt;&gt;</a> {% endif %} -->
                 {% if Forminfoevent.has_previous %}
-                <a class="prev" href="?page={{ Forminfoevent.previous_page_number}}">&lt;&lt;</a> {% endif %}{% for pg in Forminfoevent.paginator.page_range %}
-                {% circle_page Forminfoevent.number pg %}
+                <a class="prev" href="?name={{ name }}&page={{ Forminfoevent.previous_page_number}}">&lt;&lt;</a> {% endif %}{% for pg in Forminfoevent.paginator.page_range %}
+                {% circle_pagess Forminfoevent.number pg name %}
                 {% endfor %}
                 {% if Forminfoevent.has_next %}
-                <a class="next" href="?page={{ Forminfoevent.next_page_number }}">&gt;&gt;</a> {% endif %}
+                <a class="next" href="?name={{ name }}&page={{ Forminfoevent.next_page_number }}">&gt;&gt;</a> {% endif %}
             </div>
         </div>
     </div>

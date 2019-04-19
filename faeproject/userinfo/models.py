@@ -1,5 +1,5 @@
 from django.db import models
-
+from datetime import datetime
 # Create your models here.
 
 class UserInfo(models.Model):
@@ -10,7 +10,7 @@ class UserInfo(models.Model):
     city = models.CharField('所在城市', max_length=40, null=False)
     department = models.CharField('所属部门', max_length=40, null=False)
     error_number = models.IntegerField('用户密码输错次数', default=0 )
-    # isdelete = models.BooleanField('是否删除用户',default=False)
+    updated_time = models.DateTimeField(default=datetime.now, verbose_name='最后登录时间')
     isactive = models.BooleanField('是否激活此用户',default=False)
 
     class Meta:

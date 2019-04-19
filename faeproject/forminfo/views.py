@@ -1059,7 +1059,7 @@ def export_planweekquestion(request):
     thismonth = this_month_start.strftime("%m")
     lastmonth = last_month_end.strftime("%m")
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfoplan = FormInfoPlan.objects.filter(start_date__range=(laststart, lastend)).filter(username=name).filter(is_question="是").order_by("-id")
         #分页
         paginatorplan = Paginator(find_forminfoplan,20,1)
@@ -1070,7 +1070,7 @@ def export_planweekquestion(request):
             formsplan = paginatorplan.page(1)
         except EmptyPage:
             formsplan = paginatorplan.page(paginatorplan.num_pages)
-        return render(request,'planquestion.html',{'Forminfoplan':formsplan})
+        return render(request,'planquestion.html',{'Forminfoplan':formsplan,'name':name})
 
     else:
         return HttpResponse("无权查看!")
@@ -1092,7 +1092,7 @@ def export_eventweekquestion(request):
     thismonth = this_month_start.strftime("%m")
     lastmonth = last_month_end.strftime("%m")
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfoevent = FormInfoEvent.objects.filter(start_date__range=(laststart, lastend)).filter(username=name).filter(is_question="是").order_by("-id")
         #分页
         paginatorevent = Paginator(find_forminfoevent,20,1)
@@ -1103,7 +1103,7 @@ def export_eventweekquestion(request):
             formsevent = paginatorevent.page(1)
         except EmptyPage:
             formsevent = paginatorevent.page(paginatorevent.num_pages)
-        return render(request, 'eventquestion.html', {'Forminfoevent': formsevent})
+        return render(request, 'eventquestion.html', {'Forminfoevent': formsevent,'name':name})
 
     else:
         return HttpResponse("无权查看!")
@@ -1126,7 +1126,7 @@ def export_workweekquestion(request):
     thismonth = this_month_start.strftime("%m")
     lastmonth = last_month_end.strftime("%m")
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfowork = FormInfoWork.objects.filter(start_date__range=(laststart, lastend)).filter(username=name).filter(is_question="是").order_by("-id")
         #分页
         paginatorwork = Paginator(find_forminfowork,20,1)
@@ -1138,7 +1138,7 @@ def export_workweekquestion(request):
         except EmptyPage:
             formswork = paginatorwork.page(paginatorwork.num_pages)
         
-        return render(request, 'workquestion.html', {'Forminfowork': formswork})
+        return render(request, 'workquestion.html', {'Forminfowork': formswork,'name':name})
 
     else:
         return HttpResponse("无权查看!")
@@ -1159,7 +1159,7 @@ def export_planmonthquestion(request):
     thismonth = this_month_start.strftime("%m")
     lastmonth = last_month_end.strftime("%m")
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfoplan = FormInfoPlan.objects.filter(start_date__month=lastmonth).filter(username=name).filter(is_question="是").order_by("-id")
         #分页
         paginatorplan = Paginator(find_forminfoplan,20,1)
@@ -1170,7 +1170,7 @@ def export_planmonthquestion(request):
             formsplan = paginatorplan.page(1)
         except EmptyPage:
             formsplan = paginatorplan.page(paginatorplan.num_pages)
-        return render(request,'planquestion.html',{'Forminfoplan':formsplan})
+        return render(request,'planquestion.html',{'Forminfoplan':formsplan,'name':name})
     else:
         return HttpResponse("无权查看!")
 
@@ -1192,7 +1192,7 @@ def export_eventmonthquestion(request):
     thismonth = this_month_start.strftime("%m")
     lastmonth = last_month_end.strftime("%m")
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfoevent = FormInfoEvent.objects.filter(start_date__month=lastmonth).filter(username=name).filter(is_question="是").order_by("-id")
         #分页
         paginatorevent = Paginator(find_forminfoevent,20,1)
@@ -1203,7 +1203,7 @@ def export_eventmonthquestion(request):
             formsevent = paginatorevent.page(1)
         except EmptyPage:
             formsevent = paginatorevent.page(paginatorevent.num_pages)
-        return render(request, 'eventquestion.html', {'Forminfoevent': formsevent})
+        return render(request, 'eventquestion.html', {'Forminfoevent': formsevent,'name':name})
 
     else:
         return HttpResponse("无权查看!")
@@ -1225,7 +1225,7 @@ def export_workmonthquestion(request):
     thismonth = this_month_start.strftime("%m")
     lastmonth = last_month_end.strftime("%m")
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfowork = FormInfoWork.objects.filter(start_date__month=lastmonth).filter(username=name).filter(is_question="是").order_by("-id")
         #分页
         paginatorwork = Paginator(find_forminfowork,20,1)
@@ -1237,7 +1237,7 @@ def export_workmonthquestion(request):
         except EmptyPage:
             formswork = paginatorwork.page(paginatorwork.num_pages)
         
-        return render(request, 'workquestion.html', {'Forminfowork': formswork})
+        return render(request, 'workquestion.html', {'Forminfowork': formswork,'name':name})
 
     else:
         return HttpResponse("无权查看!")
@@ -1257,7 +1257,7 @@ def export_planmonthsquestion(request):
     thismonth = this_month_start.strftime("%m")
     lastmonth = last_month_end.strftime("%m")
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfoplan = FormInfoPlan.objects.filter(start_date__month=thismonth).filter(username=name).filter(is_question="是").order_by("-id")
         #分页
         paginatorplan = Paginator(find_forminfoplan,20,1)
@@ -1268,7 +1268,7 @@ def export_planmonthsquestion(request):
             formsplan = paginatorplan.page(1)
         except EmptyPage:
             formsplan = paginatorplan.page(paginatorplan.num_pages)
-        return render(request,'planquestion.html',{'Forminfoplan':formsplan})
+        return render(request,'planquestion.html',{'Forminfoplan':formsplan,'name':name})
     else:
         return HttpResponse("无权查看!")
 
@@ -1290,7 +1290,7 @@ def export_eventmonthsquestion(request):
     thismonth = this_month_start.strftime("%m")
     lastmonth = last_month_end.strftime("%m")
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfoevent = FormInfoEvent.objects.filter(start_date__month=thismonth).filter(username=name).filter(is_question="是").order_by("-id")
         #分页
         paginatorevent = Paginator(find_forminfoevent,20,1)
@@ -1301,7 +1301,7 @@ def export_eventmonthsquestion(request):
             formsevent = paginatorevent.page(1)
         except EmptyPage:
             formsevent = paginatorevent.page(paginatorevent.num_pages)
-        return render(request, 'eventquestion.html', {'Forminfoevent': formsevent})
+        return render(request, 'eventquestion.html', {'Forminfoevent': formsevent,'name':name})
 
     else:
         return HttpResponse("无权查看!")
@@ -1325,7 +1325,7 @@ def export_workmonthsquestion(request):
     thismonth = this_month_start.strftime("%m")
     lastmonth = last_month_end.strftime("%m")
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfowork = FormInfoWork.objects.filter(start_date__month=thismonth).filter(username=name).filter(is_question="是").order_by("-id")
         #分页
         paginatorwork = Paginator(find_forminfowork,20,1)
@@ -1337,7 +1337,7 @@ def export_workmonthsquestion(request):
         except EmptyPage:
             formswork = paginatorwork.page(paginatorwork.num_pages)
         
-        return render(request, 'workquestion.html', {'Forminfowork': formswork})
+        return render(request, 'workquestion.html', {'Forminfowork': formswork,'name':name})
 
     else:
         return HttpResponse("无权查看!")
@@ -1349,7 +1349,7 @@ def export_plancomment(request):
     form_id = request.session.get('user_id')
     form_user = request.session.get('user_name')
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfoplan = FormInfoPlan.objects.filter(username=name).filter(nums__gt=0).order_by("-id")
         #分页
         paginatorplan = Paginator(find_forminfoplan,20,1)
@@ -1360,7 +1360,7 @@ def export_plancomment(request):
             formsplan = paginatorplan.page(1)
         except EmptyPage:
             formsplan = paginatorplan.page(paginatorplan.num_pages)
-        return render(request,'plancomment.html',{'Forminfoplan':formsplan})
+        return render(request,'plancomment.html',{'Forminfoplan':formsplan,'name':name})
     else:
         return HttpResponse("无权查看!")
 
@@ -1371,7 +1371,7 @@ def export_eventcomment(request):
     form_id = request.session.get('user_id')
     form_user = request.session.get('user_name')
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfoevent = FormInfoEvent.objects.filter(username=name).filter(nums__gt=0).order_by("-id")
         #分页
         paginatorevent = Paginator(find_forminfoevent,20,1)
@@ -1382,7 +1382,7 @@ def export_eventcomment(request):
             formsevent = paginatorevent.page(1)
         except EmptyPage:
             formsevent = paginatorevent.page(paginatorevent.num_pages)
-        return render(request, 'eventcomment.html', {'Forminfoevent': formsevent})
+        return render(request, 'eventcomment.html', {'Forminfoevent': formsevent,'name':name})
 
     else:
         return HttpResponse("无权查看!")
@@ -1395,7 +1395,7 @@ def export_workcomment(request):
     form_user = request.session.get('user_name')
     now = datetime.datetime.now()
     if request.session.get('user_department') == "技术部":
-        name =request.GET.get('name')[:-1]
+        name =request.GET.get('name')
         find_forminfowork = FormInfoWork.objects.filter(username=name).filter(nums__gt=0).order_by("-id")
         #分页
         paginatorwork = Paginator(find_forminfowork,20,1)
@@ -1407,7 +1407,7 @@ def export_workcomment(request):
         except EmptyPage:
             formswork = paginatorwork.page(paginatorwork.num_pages)
         
-        return render(request, 'workcomment.html', {'Forminfowork': formswork})
+        return render(request, 'workcomment.html', {'Forminfowork': formswork,'name':name})
 
     else:
         return HttpResponse("无权查看!")
@@ -1773,12 +1773,133 @@ def export_excelwork_comment(request):
         logging.warning(e)
         return HttpResponse("系统有误!")
 
+def export_plan(request):
+    if not request.session.get('user_name') :
+        return render(request, 'unlogin.html', {"message": "先右上角登录再操作!"})
+    form_id = request.session.get('user_id')
+    form_user = request.session.get('user_name')
+    now = datetime.datetime.now()
+    last_week_start = now - timedelta(days=now.weekday()+7)
+    last_week_end = now - timedelta(days=now.weekday()+1)
+    this_month_start = datetime.datetime(now.year, now.month, 1)
+    last_month_end = this_month_start - timedelta(days=1)
+    laststart = last_week_start.strftime("%Y-%m-%d")
+    lastend = last_week_end.strftime("%Y-%m-%d")
+    thismonth = this_month_start.strftime("%m")
+    lastmonth = last_month_end.strftime("%m")
+    if request.session.get('user_department') == "技术部":
+        name =request.GET.get('name')
+        times = request.GET.get('times')
+        if name:
+            if times == 'week':
+                forminfoplan = FormInfoPlan.objects.filter(start_date__range=(laststart, lastend)).filter(username=name).order_by("-id")
+            elif times == 'lastmonth':
+                forminfoplan = FormInfoPlan.objects.filter(start_date__month=lastmonth).filter(username=name).order_by("-id")
+            elif times == 'thismonth':
+                forminfoplan = FormInfoPlan.objects.filter(start_date__month=thismonth).filter(username=name).order_by("-id")
+            paginatorplan = Paginator(forminfoplan,20,1)
+            pageplan = request.GET.get('page')
+            try:
+                formsplan = paginatorplan.page(pageplan)
+            except PageNotAnInteger:
+                formsplan = paginatorplan.page(1)
+            except EmptyPage:
+                formsplan = paginatorplan.page(paginatorplan.num_pages)
+            return render(request,'planperson.html',{'Forminfoplan':formsplan,'name':name,'times':times})
+        else:
+            return HttpResponse("无权查看!")
+    else:
+        return HttpResponse("无权查看!")
+
+def export_event(request):
+    if not request.session.get('user_name') :
+        return render(request, 'unlogin.html', {"message": "先右上角登录再操作!"})
+    form_id = request.session.get('user_id')
+    form_user = request.session.get('user_name')
+    now = datetime.datetime.now()
+    last_week_start = now - timedelta(days=now.weekday()+7)
+    last_week_end = now - timedelta(days=now.weekday()+1)
+    this_month_start = datetime.datetime(now.year, now.month, 1)
+    last_month_end = this_month_start - timedelta(days=1)
+    laststart = last_week_start.strftime("%Y-%m-%d")
+    lastend = last_week_end.strftime("%Y-%m-%d")
+    thismonth = this_month_start.strftime("%m")
+    lastmonth = last_month_end.strftime("%m")
+    if request.session.get('user_department') == "技术部":
+        name =request.GET.get('name')
+        times = request.GET.get('times')
+        if name:
+            if times == 'week':
+                forminfoevent = FormInfoEvent.objects.filter(start_date__range=(laststart, lastend)).filter(username=name).order_by("-id")
+            elif times == 'lastmonth':
+                forminfoevent = FormInfoEvent.objects.filter(start_date__month=lastmonth).filter(username=name).order_by("-id")
+            elif times == 'thismonth':
+                forminfoevent = FormInfoEvent.objects.filter(start_date__month=thismonth).filter(username=name).order_by("-id")
+            paginatorevent = Paginator(forminfoevent,20,1)
+            pageevent = request.GET.get('page')
+            try:
+                formsevent = paginatorevent.page(pageevent)
+            except PageNotAnInteger:
+                formsevent = paginatorevent.page(1)
+            except EmptyPage:
+                formsevent = paginatorevent.page(paginatorevent.num_pages)
+            return render(request,'eventperson.html',{'Forminfoevent':formsevent,'name':name,'times':times})
+        else:
+            return HttpResponse("无权查看!")
+    else:
+        return HttpResponse("无权查看!")
+
+def export_work(request):
+    if not request.session.get('user_name') :
+        return render(request, 'unlogin.html', {"message": "先右上角登录再操作!"})
+    form_id = request.session.get('user_id')
+    form_user = request.session.get('user_name')
+    now = datetime.datetime.now()
+    last_week_start = now - timedelta(days=now.weekday()+7)
+    last_week_end = now - timedelta(days=now.weekday()+1)
+    this_month_start = datetime.datetime(now.year, now.month, 1)
+    last_month_end = this_month_start - timedelta(days=1)
+    laststart = last_week_start.strftime("%Y-%m-%d")
+    lastend = last_week_end.strftime("%Y-%m-%d")
+    thismonth = this_month_start.strftime("%m")
+    lastmonth = last_month_end.strftime("%m")
+    if request.session.get('user_department') == "技术部":
+        name =request.GET.get('name')
+        times = request.GET.get('times')
+        if name:
+            if times == 'week':
+                forminfowork = FormInfoWork.objects.filter(start_date__range=(laststart, lastend)).filter(username=name).order_by("-id")
+            elif times == 'lastmonth':
+                forminfowork = FormInfoWork.objects.filter(start_date__month=lastmonth).filter(username=name).order_by("-id")
+            elif times == 'thismonth':
+                forminfowork = FormInfoWork.objects.filter(start_date__month=thismonth).filter(username=name).order_by("-id")
+            paginatorwork = Paginator(forminfowork,20,1)
+            pagework = request.GET.get('page')
+            try:
+                formswork = paginatorwork.page(pagework)
+            except PageNotAnInteger:
+                formswork = paginatorwork.page(1)
+            except EmptyPage:
+                formswork = paginatorwork.page(paginatorwork.num_pages)
+            return render(request,'workperson.html',{'Forminfowork':formswork,'name':name,'times':times})
+        else:
+            return HttpResponse("无权查看!")
+    else:
+        return HttpResponse("无权查看!")
+
+
+
+
+
+
 def postplan(request):
     if request.method == 'POST':
         f = request.FILES.get('excel')
         if not f:
             return render(request,'excelplan.html',{'message':'请先上传Excel文件'})
         f = request.FILES['excel']
+        if f.multiple_chunks(chunk_size=None):
+            return render(request,'excelplan.html',{'message':'文件上传大小不能超过2.5M'})
         type_excel = f.name.split('.')[1]
         if 'xls' == type_excel:
             # 从内存中直接读取前端表单上传的excel文件交给xlrd处理
@@ -1804,11 +1925,23 @@ def postplan(request):
                     for j in range(1,nrows):
                         new_info = FormInfoPlan()
                         #获取名称,根据表具体内容调整下标
-                        new_info.fae_name = table.row_values(j)[0]
-                        new_info.area = table.row_values(j)[1]
-                        new_info.sellname = table.row_values(j)[2]
+                        if table.row_values(j)[0] == "":
+                            raise Exception('方案管理-姓名不能为空')
+                        else:
+                            new_info.fae_name = table.row_values(j)[0]
+                        if table.row_values(j)[1] == "":
+                            raise Exception('方案管理-区域不能为空')
+                        else:
+                            new_info.area = table.row_values(j)[1]
+                        if table.row_values(j)[2] == "":
+                            raise Exception("方案管理-销售不能为空")
+                        else:
+                            new_info.sellname = table.row_values(j)[2]
                         new_info.customer_name = table.row_values(j)[3]
-                        new_info.number = int(table.row_values(j)[4])
+                        if table.row_values(j)[4] == "":
+                            raise Exception("方案管理-数量不能为空")
+                        else:
+                            new_info.number = int(table.row_values(j)[4])
                         new_info.customer_classification = table.row_values(j)[5]
                         new_info.project_name = table.row_values(j)[6]
                         if (table.cell(j,7).ctype == 3):           
@@ -1822,8 +1955,14 @@ def postplan(request):
                             new_info.reply_date = int(table.row_values(j)[8])
                         else:
                             new_info.reply_date = table.row_values(j)[8]
-                        new_info.estimated_time = int(table.row_values(j)[9])
-                        new_info.process = table.row_values(j)[10]
+                        if table.row_values(j)[9] == "":
+                            raise Exception("方案管理-预计用时不能为空")
+                        else:
+                            new_info.estimated_time = int(table.row_values(j)[9])
+                        if table.row_values(j)[10] == "":
+                            raise Exception("方案管理-过程描述不能为空")
+                        else:
+                            new_info.process = table.row_values(j)[10]
                         if (table.cell(j,11).ctype == 3): 
                             d1 = xlrd.xldate_as_tuple(table.row_values(j)[11],0)
                             d1_tmp = date(*d1[:3]).strftime('%Y-%m-%d')
@@ -1831,16 +1970,28 @@ def postplan(request):
                         else:
                             a = table.row_values(j)[11].replace('/','-').replace('.','-')
                             new_info.end_date = a
-                        new_info.estimate = int(table.row_values(j)[12])
+                        if table.row_values(j)[12] == "":
+                            raise Exception("方案管理-用时估算不能为空")
+                        else:
+                            new_info.estimate = int(table.row_values(j)[12])
                         new_info.username = UserInfo.objects.get(id=request.session.get('user_id'))
                         new_info.save()
 
                     for j in range(1,nrows2):
                         new_info = FormInfoEvent()
                         #获取名称,根据表具体内容调整下标
-                        new_info.fae_name = table2.row_values(j)[0]
-                        new_info.area = table2.row_values(j)[1]
-                        new_info.sellname = table2.row_values(j)[2]
+                        if table2.row_values(j)[0] == "":
+                            raise Exception('事件管理-姓名不能为空')
+                        else:
+                            new_info.fae_name = table2.row_values(j)[0]
+                        if table2.row_values(j)[1] == "":
+                            raise Exception('事件管理-区域不能为空')
+                        else:
+                            new_info.area = table2.row_values(j)[1]
+                        if table2.row_values(j)[2] == "":
+                            raise Exception('事件管理-销售不能为空')
+                        else:
+                            new_info.sellname = table2.row_values(j)[2]
                         new_info.customer_name = table2.row_values(j)[3]
                         # new_info.number = int(table.row_values(j)[4])
                         new_info.customer_classification = table2.row_values(j)[4]
@@ -1860,8 +2011,14 @@ def postplan(request):
                         else:
                             new_info.reply_date = table2.row_values(j)[7]
                             # print('是文本格式')
-                        new_info.estimated_time = int(table2.row_values(j)[8])
-                        new_info.process = table2.row_values(j)[9]
+                        if table2.row_values(j)[8] == "":
+                            raise Exception('事件管理-预计用时不能为空')
+                        else:
+                            new_info.estimated_time = int(table2.row_values(j)[8])
+                        if table2.row_values(j)[9] == "":
+                            raise Exception('事件管理-过程描述不能为空')
+                        else:
+                            new_info.process = table2.row_values(j)[9]
                         if (table2.cell(j,10).ctype == 3): 
                             d1 = xlrd.xldate_as_tuple(table2.row_values(j)[10],0)
                             d1_tmp = date(*d1[:3]).strftime('%Y-%m-%d')
@@ -1871,17 +2028,32 @@ def postplan(request):
                             a = table2.row_values(j)[10].replace('/','-').replace('.','-')
                             new_info.end_date = a
                             # print('是文本格式')
-                        new_info.estimate = int(table2.row_values(j)[11])
+                        if table2.row_values(j)[11] == "":
+                            raise Exception('事件管理-用时估算不能为空')
+                        else:
+                            new_info.estimate = int(table2.row_values(j)[11])
                         new_info.username = UserInfo.objects.get(id=request.session.get('user_id'))
                         new_info.save()
 
                     for j in range(1,nrows3):
                         new_info = FormInfoWork()
                         #获取名称,根据表具体内容调整下标
-                        new_info.fae_name = table3.row_values(j)[0]
-                        new_info.area = table3.row_values(j)[1]
-                        new_info.sellname = table3.row_values(j)[2]
-                        new_info.demand = table3.row_values(j)[3]
+                        if table3.row_values(j)[0] == "":
+                            raise Exception('日常管理-姓名不能为空')
+                        else:
+                            new_info.fae_name = table3.row_values(j)[0]
+                        if table3.row_values(j)[1] == "":
+                            raise Exception('日常管理-区域不能为空')
+                        else:
+                            new_info.area = table3.row_values(j)[1]
+                        if table3.row_values(j)[2] == "":
+                            raise Exception('日常管理-需求者不能为空')
+                        else:
+                            new_info.sellname = table3.row_values(j)[2]
+                        if table3.row_values(j)[3] == "":
+                            raise Exception('日常管理-需求部门不能为空')
+                        else:
+                            new_info.demand = table3.row_values(j)[3]
                         new_info.customer_name = table3.row_values(j)[4]
                         # new_info.number = int(table.row_values(j)[4])
                         new_info.customer_classification = table3.row_values(j)[5]
@@ -1899,8 +2071,14 @@ def postplan(request):
                         #     new_info.reply_date = int(table.row_values(j)[8])
                         # else:
                         #     new_info.reply_date = table.row_values(j)[8]
-                        new_info.estimated_time = int(table3.row_values(j)[7])
-                        new_info.process = table3.row_values(j)[8]
+                        if table3.row_values(j)[7] == "":
+                            raise Exception('日常管理-预计用时不能为空')
+                        else:
+                            new_info.estimated_time = int(table3.row_values(j)[7])
+                        if table3.row_values(j)[8] == "":
+                            raise Exception('日常管理-过程描述不能为空')
+                        else:
+                            new_info.process = table3.row_values(j)[8]
                         if (table3.cell(j,9).ctype == 3): 
                             d1 = xlrd.xldate_as_tuple(table3.row_values(j)[9],0)
                             d1_tmp = date(*d1[:3]).strftime('%Y-%m-%d')
@@ -1910,13 +2088,14 @@ def postplan(request):
                             a = table3.row_values(j)[9].replace('/','-').replace('.','-')
                             new_info.end_date = a
                             # print('是文本格式')
-                        new_info.estimate = int(table3.row_values(j)[10])
+                        if table3.row_values(j)[10] == "":
+                            raise Exception('日常管理-用时估算不能为空')
+                        else:
+                            new_info.estimate = int(table3.row_values(j)[10])
                         new_info.username = UserInfo.objects.get(id=request.session.get('user_id'))
                         new_info.save()
-
             except Exception as e:
-                logging.warning(e)
-                return render(request,'excelplan.html', {'message':'导入失败,请仔细检查文件'})
+                return render(request,'excelplan.html', {'message':'导入失败.第%s行:%s'%(j+1,e)})
             return render(request,'excelplan.html',{'message':'导入成功,请返回首页查看'})
         return render(request,'excelplan.html',{'message':'请检查是否是Excel文件'})
     return render(request, '404.html')
@@ -1927,6 +2106,8 @@ def postevent(request):
         if not f:
             return render(request,'excelevent.html',{'message':'请先上传Excel文件'})
         f = request.FILES['excel']
+        if f.multiple_chunks(chunk_size=None):
+            return render(request,'excelevent.html',{'message':'文件上传大小不能超过2.5M'})
         type_excel = f.name.split('.')[1]
         if 'xls' == type_excel:
             # 从内存中直接读取前端表单上传的excel文件交给xlrd处理
@@ -1952,11 +2133,23 @@ def postevent(request):
                     for j in range(1,nrows):
                         new_info = FormInfoPlan()
                         #获取名称,根据表具体内容调整下标
-                        new_info.fae_name = table.row_values(j)[0]
-                        new_info.area = table.row_values(j)[1]
-                        new_info.sellname = table.row_values(j)[2]
+                        if table.row_values(j)[0] == "":
+                            raise Exception('方案管理-姓名不能为空')
+                        else:
+                            new_info.fae_name = table.row_values(j)[0]
+                        if table.row_values(j)[1] == "":
+                            raise Exception('方案管理-区域不能为空')
+                        else:
+                            new_info.area = table.row_values(j)[1]
+                        if table.row_values(j)[2] == "":
+                            raise Exception("方案管理-销售不能为空")
+                        else:
+                            new_info.sellname = table.row_values(j)[2]
                         new_info.customer_name = table.row_values(j)[3]
-                        new_info.number = int(table.row_values(j)[4])
+                        if table.row_values(j)[4] == "":
+                            raise Exception("方案管理-数量不能为空")
+                        else:
+                            new_info.number = int(table.row_values(j)[4])
                         new_info.customer_classification = table.row_values(j)[5]
                         new_info.project_name = table.row_values(j)[6]
                         if (table.cell(j,7).ctype == 3):           
@@ -1970,8 +2163,14 @@ def postevent(request):
                             new_info.reply_date = int(table.row_values(j)[8])
                         else:
                             new_info.reply_date = table.row_values(j)[8]
-                        new_info.estimated_time = int(table.row_values(j)[9])
-                        new_info.process = table.row_values(j)[10]
+                        if table.row_values(j)[9] == "":
+                            raise Exception("方案管理-预计用时不能为空")
+                        else:
+                            new_info.estimated_time = int(table.row_values(j)[9])
+                        if table.row_values(j)[10] == "":
+                            raise Exception("方案管理-过程描述不能为空")
+                        else:
+                            new_info.process = table.row_values(j)[10]
                         if (table.cell(j,11).ctype == 3): 
                             d1 = xlrd.xldate_as_tuple(table.row_values(j)[11],0)
                             d1_tmp = date(*d1[:3]).strftime('%Y-%m-%d')
@@ -1979,16 +2178,28 @@ def postevent(request):
                         else:
                             a = table.row_values(j)[11].replace('/','-').replace('.','-')
                             new_info.end_date = a
-                        new_info.estimate = int(table.row_values(j)[12])
+                        if table.row_values(j)[12] == "":
+                            raise Exception("方案管理-用时估算不能为空")
+                        else:
+                            new_info.estimate = int(table.row_values(j)[12])
                         new_info.username = UserInfo.objects.get(id=request.session.get('user_id'))
                         new_info.save()
 
                     for j in range(1,nrows2):
                         new_info = FormInfoEvent()
                         #获取名称,根据表具体内容调整下标
-                        new_info.fae_name = table2.row_values(j)[0]
-                        new_info.area = table2.row_values(j)[1]
-                        new_info.sellname = table2.row_values(j)[2]
+                        if table2.row_values(j)[0] == "":
+                            raise Exception('事件管理-姓名不能为空')
+                        else:
+                            new_info.fae_name = table2.row_values(j)[0]
+                        if table2.row_values(j)[1] == "":
+                            raise Exception('事件管理-区域不能为空')
+                        else:
+                            new_info.area = table2.row_values(j)[1]
+                        if table2.row_values(j)[2] == "":
+                            raise Exception('事件管理-销售不能为空')
+                        else:
+                            new_info.sellname = table2.row_values(j)[2]
                         new_info.customer_name = table2.row_values(j)[3]
                         # new_info.number = int(table.row_values(j)[4])
                         new_info.customer_classification = table2.row_values(j)[4]
@@ -2008,8 +2219,14 @@ def postevent(request):
                         else:
                             new_info.reply_date = table2.row_values(j)[7]
                             # print('是文本格式')
-                        new_info.estimated_time = int(table2.row_values(j)[8])
-                        new_info.process = table2.row_values(j)[9]
+                        if table2.row_values(j)[8] == "":
+                            raise Exception('事件管理-预计用时不能为空')
+                        else:
+                            new_info.estimated_time = int(table2.row_values(j)[8])
+                        if table2.row_values(j)[9] == "":
+                            raise Exception('事件管理-过程描述不能为空')
+                        else:
+                            new_info.process = table2.row_values(j)[9]
                         if (table2.cell(j,10).ctype == 3): 
                             d1 = xlrd.xldate_as_tuple(table2.row_values(j)[10],0)
                             d1_tmp = date(*d1[:3]).strftime('%Y-%m-%d')
@@ -2019,17 +2236,32 @@ def postevent(request):
                             a = table2.row_values(j)[10].replace('/','-').replace('.','-')
                             new_info.end_date = a
                             # print('是文本格式')
-                        new_info.estimate = int(table2.row_values(j)[11])
+                        if table2.row_values(j)[11] == "":
+                            raise Exception('事件管理-用时估算不能为空')
+                        else:
+                            new_info.estimate = int(table2.row_values(j)[11])
                         new_info.username = UserInfo.objects.get(id=request.session.get('user_id'))
                         new_info.save()
 
                     for j in range(1,nrows3):
                         new_info = FormInfoWork()
                         #获取名称,根据表具体内容调整下标
-                        new_info.fae_name = table3.row_values(j)[0]
-                        new_info.area = table3.row_values(j)[1]
-                        new_info.sellname = table3.row_values(j)[2]
-                        new_info.demand = table3.row_values(j)[3]
+                        if table3.row_values(j)[0] == "":
+                            raise Exception('日常管理-姓名不能为空')
+                        else:
+                            new_info.fae_name = table3.row_values(j)[0]
+                        if table3.row_values(j)[1] == "":
+                            raise Exception('日常管理-区域不能为空')
+                        else:
+                            new_info.area = table3.row_values(j)[1]
+                        if table3.row_values(j)[2] == "":
+                            raise Exception('日常管理-需求者不能为空')
+                        else:
+                            new_info.sellname = table3.row_values(j)[2]
+                        if table3.row_values(j)[3] == "":
+                            raise Exception('日常管理-需求部门不能为空')
+                        else:
+                            new_info.demand = table3.row_values(j)[3]
                         new_info.customer_name = table3.row_values(j)[4]
                         # new_info.number = int(table.row_values(j)[4])
                         new_info.customer_classification = table3.row_values(j)[5]
@@ -2047,8 +2279,14 @@ def postevent(request):
                         #     new_info.reply_date = int(table.row_values(j)[8])
                         # else:
                         #     new_info.reply_date = table.row_values(j)[8]
-                        new_info.estimated_time = int(table3.row_values(j)[7])
-                        new_info.process = table3.row_values(j)[8]
+                        if table3.row_values(j)[7] == "":
+                            raise Exception('日常管理-预计用时不能为空')
+                        else:
+                            new_info.estimated_time = int(table3.row_values(j)[7])
+                        if table3.row_values(j)[8] == "":
+                            raise Exception('日常管理-过程描述不能为空')
+                        else:
+                            new_info.process = table3.row_values(j)[8]
                         if (table3.cell(j,9).ctype == 3): 
                             d1 = xlrd.xldate_as_tuple(table3.row_values(j)[9],0)
                             d1_tmp = date(*d1[:3]).strftime('%Y-%m-%d')
@@ -2058,13 +2296,14 @@ def postevent(request):
                             a = table3.row_values(j)[9].replace('/','-').replace('.','-')
                             new_info.end_date = a
                             # print('是文本格式')
-                        new_info.estimate = int(table3.row_values(j)[10])
+                        if table3.row_values(j)[10] == "":
+                            raise Exception('日常管理-用时估算不能为空')
+                        else:
+                            new_info.estimate = int(table3.row_values(j)[10])
                         new_info.username = UserInfo.objects.get(id=request.session.get('user_id'))
                         new_info.save()
-
             except Exception as e:
-                logging.warning(e)
-                return render(request,'excelevent.html', {'message':'导入失败,请仔细检查文件'})
+                return render(request,'excelevent.html', {'message':'导入失败.第%s行:%s'%(j+1,e)})
             return render(request,'excelevent.html',{'message':'导入成功,请返回首页查看'})
         return render(request,'excelevent.html',{'message':'请检查是否是Excel文件'})
     return render(request, '404.html')
@@ -2075,12 +2314,14 @@ def postwork(request):
         if not f:
             return render(request,'excelwork.html',{'message':'请先上传Excel文件'})
         f = request.FILES['excel']
+        if f.multiple_chunks(chunk_size=None):
+            return render(request,'excelwork.html',{'message':'文件上传大小不能超过2.5M'})
         type_excel = f.name.split('.')[1]
         if 'xls' == type_excel:
             # 从内存中直接读取前端表单上传的excel文件交给xlrd处理
             wb = xlrd.open_workbook(filename=None,file_contents=f.read())
             if wb.sheet_names() != ['方案管理', '事件管理', '日常管理']:
-                return render(request,'excelevent.html',{'message':'Excel文件必须包含三张表格,请检查'})
+                return render(request,'excelwork.html',{'message':'Excel文件必须包含三张表格,请检查'})
             #获取excel第一个表
             table = wb.sheets()[0]
             #获取excel第二张表
@@ -2100,11 +2341,23 @@ def postwork(request):
                     for j in range(1,nrows):
                         new_info = FormInfoPlan()
                         #获取名称,根据表具体内容调整下标
-                        new_info.fae_name = table.row_values(j)[0]
-                        new_info.area = table.row_values(j)[1]
-                        new_info.sellname = table.row_values(j)[2]
+                        if table.row_values(j)[0] == "":
+                            raise Exception('方案管理-姓名不能为空')
+                        else:
+                            new_info.fae_name = table.row_values(j)[0]
+                        if table.row_values(j)[1] == "":
+                            raise Exception('方案管理-区域不能为空')
+                        else:
+                            new_info.area = table.row_values(j)[1]
+                        if table.row_values(j)[2] == "":
+                            raise Exception("方案管理-销售不能为空")
+                        else:
+                            new_info.sellname = table.row_values(j)[2]
                         new_info.customer_name = table.row_values(j)[3]
-                        new_info.number = int(table.row_values(j)[4])
+                        if table.row_values(j)[4] == "":
+                            raise Exception("方案管理-数量不能为空")
+                        else:
+                            new_info.number = int(table.row_values(j)[4])
                         new_info.customer_classification = table.row_values(j)[5]
                         new_info.project_name = table.row_values(j)[6]
                         if (table.cell(j,7).ctype == 3):           
@@ -2118,8 +2371,14 @@ def postwork(request):
                             new_info.reply_date = int(table.row_values(j)[8])
                         else:
                             new_info.reply_date = table.row_values(j)[8]
-                        new_info.estimated_time = int(table.row_values(j)[9])
-                        new_info.process = table.row_values(j)[10]
+                        if table.row_values(j)[9] == "":
+                            raise Exception("方案管理-预计用时不能为空")
+                        else:
+                            new_info.estimated_time = int(table.row_values(j)[9])
+                        if table.row_values(j)[10] == "":
+                            raise Exception("方案管理-过程描述不能为空")
+                        else:
+                            new_info.process = table.row_values(j)[10]
                         if (table.cell(j,11).ctype == 3): 
                             d1 = xlrd.xldate_as_tuple(table.row_values(j)[11],0)
                             d1_tmp = date(*d1[:3]).strftime('%Y-%m-%d')
@@ -2127,16 +2386,28 @@ def postwork(request):
                         else:
                             a = table.row_values(j)[11].replace('/','-').replace('.','-')
                             new_info.end_date = a
-                        new_info.estimate = int(table.row_values(j)[12])
+                        if table.row_values(j)[12] == "":
+                            raise Exception("方案管理-用时估算不能为空")
+                        else:
+                            new_info.estimate = int(table.row_values(j)[12])
                         new_info.username = UserInfo.objects.get(id=request.session.get('user_id'))
                         new_info.save()
 
                     for j in range(1,nrows2):
                         new_info = FormInfoEvent()
                         #获取名称,根据表具体内容调整下标
-                        new_info.fae_name = table2.row_values(j)[0]
-                        new_info.area = table2.row_values(j)[1]
-                        new_info.sellname = table2.row_values(j)[2]
+                        if table2.row_values(j)[0] == "":
+                            raise Exception('事件管理-姓名不能为空')
+                        else:
+                            new_info.fae_name = table2.row_values(j)[0]
+                        if table2.row_values(j)[1] == "":
+                            raise Exception('事件管理-区域不能为空')
+                        else:
+                            new_info.area = table2.row_values(j)[1]
+                        if table2.row_values(j)[2] == "":
+                            raise Exception('事件管理-销售不能为空')
+                        else:
+                            new_info.sellname = table2.row_values(j)[2]
                         new_info.customer_name = table2.row_values(j)[3]
                         # new_info.number = int(table.row_values(j)[4])
                         new_info.customer_classification = table2.row_values(j)[4]
@@ -2156,8 +2427,14 @@ def postwork(request):
                         else:
                             new_info.reply_date = table2.row_values(j)[7]
                             # print('是文本格式')
-                        new_info.estimated_time = int(table2.row_values(j)[8])
-                        new_info.process = table2.row_values(j)[9]
+                        if table2.row_values(j)[8] == "":
+                            raise Exception('事件管理-预计用时不能为空')
+                        else:
+                            new_info.estimated_time = int(table2.row_values(j)[8])
+                        if table2.row_values(j)[9] == "":
+                            raise Exception('事件管理-过程描述不能为空')
+                        else:
+                            new_info.process = table2.row_values(j)[9]
                         if (table2.cell(j,10).ctype == 3): 
                             d1 = xlrd.xldate_as_tuple(table2.row_values(j)[10],0)
                             d1_tmp = date(*d1[:3]).strftime('%Y-%m-%d')
@@ -2167,17 +2444,32 @@ def postwork(request):
                             a = table2.row_values(j)[10].replace('/','-').replace('.','-')
                             new_info.end_date = a
                             # print('是文本格式')
-                        new_info.estimate = int(table2.row_values(j)[11])
+                        if table2.row_values(j)[11] == "":
+                            raise Exception('事件管理-用时估算不能为空')
+                        else:
+                            new_info.estimate = int(table2.row_values(j)[11])
                         new_info.username = UserInfo.objects.get(id=request.session.get('user_id'))
                         new_info.save()
 
                     for j in range(1,nrows3):
                         new_info = FormInfoWork()
                         #获取名称,根据表具体内容调整下标
-                        new_info.fae_name = table3.row_values(j)[0]
-                        new_info.area = table3.row_values(j)[1]
-                        new_info.sellname = table3.row_values(j)[2]
-                        new_info.demand = table3.row_values(j)[3]
+                        if table3.row_values(j)[0] == "":
+                            raise Exception('日常管理-姓名不能为空')
+                        else:
+                            new_info.fae_name = table3.row_values(j)[0]
+                        if table3.row_values(j)[1] == "":
+                            raise Exception('日常管理-区域不能为空')
+                        else:
+                            new_info.area = table3.row_values(j)[1]
+                        if table3.row_values(j)[2] == "":
+                            raise Exception('日常管理-需求者不能为空')
+                        else:
+                            new_info.sellname = table3.row_values(j)[2]
+                        if table3.row_values(j)[3] == "":
+                            raise Exception('日常管理-需求部门不能为空')
+                        else:
+                            new_info.demand = table3.row_values(j)[3]
                         new_info.customer_name = table3.row_values(j)[4]
                         # new_info.number = int(table.row_values(j)[4])
                         new_info.customer_classification = table3.row_values(j)[5]
@@ -2195,8 +2487,14 @@ def postwork(request):
                         #     new_info.reply_date = int(table.row_values(j)[8])
                         # else:
                         #     new_info.reply_date = table.row_values(j)[8]
-                        new_info.estimated_time = int(table3.row_values(j)[7])
-                        new_info.process = table3.row_values(j)[8]
+                        if table3.row_values(j)[7] == "":
+                            raise Exception('日常管理-预计用时不能为空')
+                        else:
+                            new_info.estimated_time = int(table3.row_values(j)[7])
+                        if table3.row_values(j)[8] == "":
+                            raise Exception('日常管理-过程描述不能为空')
+                        else:
+                            new_info.process = table3.row_values(j)[8]
                         if (table3.cell(j,9).ctype == 3): 
                             d1 = xlrd.xldate_as_tuple(table3.row_values(j)[9],0)
                             d1_tmp = date(*d1[:3]).strftime('%Y-%m-%d')
@@ -2206,13 +2504,14 @@ def postwork(request):
                             a = table3.row_values(j)[9].replace('/','-').replace('.','-')
                             new_info.end_date = a
                             # print('是文本格式')
-                        new_info.estimate = int(table3.row_values(j)[10])
+                        if table3.row_values(j)[10] == "":
+                            raise Exception('日常管理-用时估算不能为空')
+                        else:
+                            new_info.estimate = int(table3.row_values(j)[10])
                         new_info.username = UserInfo.objects.get(id=request.session.get('user_id'))
                         new_info.save()
-
             except Exception as e:
-                logging.warning(e)
-                return render(request,'excelwork.html', {'message':'导入失败,请仔细检查文件'})
+                return render(request,'excelwork.html', {'message':'导入失败.第%s行:%s'%(j+1,e)})
             return render(request,'excelwork.html',{'message':'导入成功,请返回首页查看'})
         return render(request,'excelwork.html',{'message':'请检查是否是Excel文件'})
     return render(request, '404.html')

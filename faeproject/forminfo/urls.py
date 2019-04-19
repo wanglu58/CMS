@@ -73,7 +73,11 @@ urlpatterns = [
     url(r"^exportworkmonthsquestion/$",views.export_workmonthsquestion),
     url(r"^exportplancomment/$",views.export_plancomment),
     url(r"^exporteventcomment/$",views.export_eventcomment),
-    url(r"^exportworkcomment/$",views.export_workcomment)
+    url(r"^exportworkcomment/$",views.export_workcomment),
+    url(r"^exportplan/$",views.export_plan),
+    url(r"^exportevent/$",views.export_event),
+    url(r"^exportwork/$",views.export_work)
+    
     # url(r"^list/$", List_.as_view(),name='list'),
     # url(r"^test/$", Test.as_view(),name='test')
 
